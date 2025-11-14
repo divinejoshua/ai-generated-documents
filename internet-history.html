@@ -3,117 +3,171 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>The History of the Internet — Report</title>
+  <title>The History of the Internet — Report (A4)</title>
   <style>
-    body{
+    /* --- Base Styling --- */
+    body {
       font-family: Arial, sans-serif;
-      background:white;
-      color:black;
-      margin:40px auto;
-      max-width:900px;
-      line-height:1.6;
+      background: #f7f7f7; /* Light background to show page separation */
+      color: black;
+      margin: 0;
+      padding: 0;
+      letter-spacing: .5px;
+      line-height: 1.5;
     }
-    h1,h2,h3{
-      color:#2e4a7b; /* gentle blue */
-      margin-top:32px;
-      font-weight:700;
+    h1, h2, h3 {
+      color: #2e4a7b; /* gentle blue */
+      margin-top: 32px;
+      font-weight: 700;
     }
-    h1{font-size:32px; text-align:center; margin-bottom:10px;}
-    h2{font-size:24px;}
-    h3{font-size:20px;}
-    p{margin:12px 0;}
-    .toc{
-      border:1px solid #ccc;
-      padding:16px;
-      background:#f9f9f9;
-      margin:20px 0;
+    h1 { font-size: 32px; text-align: center; margin-bottom: 10px; }
+    h2 { font-size: 24px; }
+    h3 { font-size: 20px; }
+    p { margin: 12px 0; }
+    .toc {
+      border: 1px solid #ccc;
+      padding: 16px;
+      background: #f9f9f9;
+      margin: 20px 0;
     }
-    .toc a{
-      color:#2e4a7b;
-      text-decoration:none;
+    .toc a {
+      color: #2e4a7b;
+      text-decoration: none;
     }
-    .quote{
-      border-left:4px solid #2e4a7b;
-      padding-left:12px;
-      margin:16px 0;
-      font-style:italic;
+    .quote {
+      border-left: 4px solid #2e4a7b;
+      padding-left: 12px;
+      margin: 16px 0;
+      font-style: italic;
     }
-      table{
-      width:100%;
-      border-collapse:collapse;
-      margin:20px 0;
-      font-size:15px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 15px;
     }
-    table th{
-      background:#eef3fa;
-      color:#2e4a7b;
-      padding:10px;
-      border:1px solid #ccc;
-      text-align:left;
+    table th {
+      background: #eef3fa;
+      color: #2e4a7b;
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
     }
-    table td{
-      padding:10px;
-      border:1px solid #ccc;
-      background:#fafafa;
+    table td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      background: #fafafa;
     }
-    .highlight{
-      background:#f3f7ff;
-      border-left:4px solid #2e4a7b;
-      padding:12px;
-      margin:20px 0;
+    .highlight {
+      background: #f3f7ff;
+      border-left: 4px solid #2e4a7b;
+      padding: 12px;
+      margin: 20px 0;
+    }
+
+    /* --- CSS for Pagination (A4 Print Simulation) --- */
+    @page {
+      size: A4; 
+      margin: 1.5cm 1.5cm 1.5cm 1.5cm;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 40px; /* Use internal padding for content inside the A4 area */
+      margin: 15px auto; /* Center pages on screen */
+      max-width: 900px; /* Keep content narrow for readability */
+      background: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+    }
+
+    /* Styles specific to printing */
+    @media print {
+      body {
+        background-color: white !important;
+      }
+      .page {
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        padding: 0; /* Let @page margins handle the padding */
+        page-break-after: always;
+        max-width: none;
+      }
+      .page:last-child {
+        page-break-after: avoid;
+      }
+      h2, h3, section {
+        page-break-inside: avoid;
+        page-break-after: avoid;
+      }
+      /* Ensure the table stays together */
+      table {
+        page-break-inside: avoid;
+      }
+      .page-break {
+        page-break-after: always;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>The History of the Internet</h1>
-  <p><strong>Prepared:</strong> Nov 14, 2025</p>
+  
+  <div class="page">
+    <h1>The History of the Internet</h1>
+    <p><strong>Prepared:</strong> Nov 14, 2025</p>
 
-  <div class="toc">
-    <strong>Contents</strong>
-    <ul>
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#origins">Origins (1960s–1970s)</a></li>
-      <li><a href="#tcpip">TCP/IP (1980s)</a></li>
-      <li><a href="#www">The World Wide Web (1990s)</a></li>
-      <li><a href="#broadband">Broadband & Mobile (2000s)</a></li>
-      <li><a href="#modern">Modern Web (2010s–2020s)</a></li>
-      <li><a href="#future">The Future</a></li>
-    </ul>
+    <div class="toc">
+      <strong>Contents</strong>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#origins">Origins (1960s–1970s)</a></li>
+        <li><a href="#tcpip">TCP/IP (1980s)</a></li>
+        <li><a href="#www">The World Wide Web (1990s)</a></li>
+        <li><a href="#broadband">Broadband & Mobile (2000s)</a></li>
+        <li><a href="#modern">Modern Web (2010s–2020s)</a></li>
+        <li><a href="#future">The Future</a></li>
+      </ul>
+    </div>
+
+    <h2 id="overview">Overview</h2>
+    <div class="highlight"><strong>Quick Snapshot:</strong> The Internet evolved through research, standardization, commercialization, and global adoption. The table below summarizes the major eras.</div>
+    <table>
+      <tr><th>Era</th><th>Key Developments</th></tr>
+      <tr><td>1960s–1970s</td><td>Packet switching, ARPANET, early networking research</td></tr>
+      <tr><td>1980s</td><td>TCP/IP adoption, standardization of core protocols</td></tr>
+      <tr><td>1990s</td><td>World Wide Web, browsers, commercialization</td></tr>
+      <tr><td>2000s</td><td>Broadband, Wi-Fi, mobile Internet, social media</td></tr>
+      <tr><td>2010s–2020s</td><td>Cloud computing, platforms, encryption-by-default</td></tr>
+    </table>
+    <p>The Internet is a global network that reshaped communication, business, research, and culture. This report outlines its key historical milestones, starting with early experiments in digital networking and ending with the present era of cloud services and pervasive mobile access.</p>
+
+    <h2 id="origins">Origins (1960s–1970s)</h2>
+    <p>The earliest foundations of the Internet lie in research on <strong>packet switching</strong>, a method of transmitting data in small units. This approach, developed by researchers such as Paul Baran and Donald Davies, allowed networks to be more robust and efficient.</p>
+    <p>In 1969, ARPANET became the first operational packet-switched network, linking universities across the United States. Email soon emerged as one of the first widely-used network applications.</p>
+
+    <h2 id="tcpip" class="page-break">TCP/IP & Standardization (1980s)</h2>
+    <p>As various networks grew, a unified communications standard became essential. Vint Cerf and Bob Kahn designed TCP/IP, which separated routing (IP) from reliable transmission (TCP). On January 1, 1983, ARPANET officially adopted TCP/IP, marking the birth of the modern Internet architecture.</p>
+  </div>
+  
+  <div class="page">
+    <h2 id="www">The World Wide Web (1990s)</h2>
+    <p>The creation of the World Wide Web by Tim Berners-Lee in 1989–1990 transformed the Internet. HTML, URLs, and HTTP enabled linked documents accessible to anyone with a browser.</p>
+    <p>Graphical browsers like Mosaic (1993) made the Web mainstream, fueling rapid growth in websites, search engines, and online commerce.</p>
+    <div class="quote">“The Web is more a social creation than a technical one.” — Tim Berners‑Lee</div>
+
+    <h2 id="broadband">Broadband, Mobile & Social (2000s)</h2>
+    <p>The 2000s saw the shift to always‑on connections via DSL and cable. Wi‑Fi expanded home networking, while early mobile Internet services began to appear. Social networks, user-generated platforms, and multimedia sites reshaped online behavior.</p>
+
+    <h2 id="modern">The Modern Web (2010s–2020s)</h2>
+    <p>Cloud computing, smartphones, and large-scale platforms define this era. Content streaming, real‑time communication, and encrypted connections (HTTPS) dominate traffic. Privacy, cybersecurity, and data governance have become central concerns.</p>
+
+    <h2 id="future">The Future</h2>
+    <p>The Internet continues to evolve. Trends such as decentralization, edge computing, quantum‑safe cryptography, and global satellite networks will shape its next decades.</p>
+
+    <p><em>This simplified layout is styled to resemble a clean, modern Word document with gentle headings and minimal decoration.</em></p>
   </div>
 
-  <h2 id="overview">Overview</h2>
-  <div class="highlight"><strong>Quick Snapshot:</strong> The Internet evolved through research, standardization, commercialization, and global adoption. The table below summarizes the major eras.</div>
-  <table>
-    <tr><th>Era</th><th>Key Developments</th></tr>
-    <tr><td>1960s–1970s</td><td>Packet switching, ARPANET, early networking research</td></tr>
-    <tr><td>1980s</td><td>TCP/IP adoption, standardization of core protocols</td></tr>
-    <tr><td>1990s</td><td>World Wide Web, browsers, commercialization</td></tr>
-    <tr><td>2000s</td><td>Broadband, Wi-Fi, mobile Internet, social media</td></tr>
-    <tr><td>2010s–2020s</td><td>Cloud computing, platforms, encryption-by-default</td></tr>
-  </table>
-  <p>The Internet is a global network that reshaped communication, business, research, and culture. This report outlines its key historical milestones, starting with early experiments in digital networking and ending with the present era of cloud services and pervasive mobile access.</p>
-
-  <h2 id="origins">Origins (1960s–1970s)</h2>
-  <p>The earliest foundations of the Internet lie in research on <strong>packet switching</strong>, a method of transmitting data in small units. This approach, developed by researchers such as Paul Baran and Donald Davies, allowed networks to be more robust and efficient.</p>
-  <p>In 1969, ARPANET became the first operational packet-switched network, linking universities across the United States. Email soon emerged as one of the first widely-used network applications.</p>
-
-  <h2 id="tcpip">TCP/IP & Standardization (1980s)</h2>
-  <p>As various networks grew, a unified communications standard became essential. Vint Cerf and Bob Kahn designed TCP/IP, which separated routing (IP) from reliable transmission (TCP). On January 1, 1983, ARPANET officially adopted TCP/IP, marking the birth of the modern Internet architecture.</p>
-
-  <h2 id="www">The World Wide Web (1990s)</h2>
-  <p>The creation of the World Wide Web by Tim Berners-Lee in 1989–1990 transformed the Internet. HTML, URLs, and HTTP enabled linked documents accessible to anyone with a browser.</p>
-  <p>Graphical browsers like Mosaic (1993) made the Web mainstream, fueling rapid growth in websites, search engines, and online commerce.</p>
-  <div class="quote">“The Web is more a social creation than a technical one.” — Tim Berners‑Lee</div>
-
-  <h2 id="broadband">Broadband, Mobile & Social (2000s)</h2>
-  <p>The 2000s saw the shift to always‑on connections via DSL and cable. Wi‑Fi expanded home networking, while early mobile Internet services began to appear. Social networks, user-generated platforms, and multimedia sites reshaped online behavior.</p>
-
-  <h2 id="modern">The Modern Web (2010s–2020s)</h2>
-  <p>Cloud computing, smartphones, and large-scale platforms define this era. Content streaming, real‑time communication, and encrypted connections (HTTPS) dominate traffic. Privacy, cybersecurity, and data governance have become central concerns.</p>
-
-  <h2 id="future">The Future</h2>
-  <p>The Internet continues to evolve. Trends such as decentralization, edge computing, quantum‑safe cryptography, and global satellite networks will shape its next decades.</p>
-
-  <p><em>This simplified layout is styled to resemble a clean, modern Word document with gentle headings and minimal decoration.</em></p>
 </body>
 </html>

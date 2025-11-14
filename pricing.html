@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Service Pricing Strategy - A4 Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary-text': '#374151',
+                        'subtle-border': '#E5E7EB',
+                        'subtle-bg': '#F9FAFB',
+                        'accent-dark': '#4B5563',
+                        'accent-light': '#D1D5DB',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        /* --- Custom Styles for Report Elements (Unchanged) --- */
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #374151;
+            border-left: 4px solid #9CA3AF;
+            padding-left: 0.75rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #4B5563;
+        }
+        .data-table th {
+            background-color: #F3F4F6;
+            color: #4B5563;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid #E5E7EB;
+        }
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid #F3F4F6;
+        }
+        .toc-list a {
+            color: #4B5563;
+            text-decoration: none;
+            display: block;
+            padding: 4px 0;
+        }
+        .toc-list a:hover {
+            color: #1F2937;
+            text-decoration: underline;
+        }
+/* --- A4 Print Layout Fix --- */
+
+/* A4 print setup */
+@page {
+    size: A4;
+    margin: 1.2cm; /* Adjust as desired (1.2–1.6cm is typical) */
+}
+
+.page {
+    width: 100%;
+    max-width: 100%;          /* Fill full printable width */
+    margin: 0 auto;
+    padding: 0;               /* Remove visual padding */
+    background: white;
+    box-shadow: none;         /* Avoid extra spacing in PDFs */
+    box-sizing: border-box;
+}
+
+/* Screen-only enhancements */
+@media screen {
+    body {
+        background: #f0f0f0;
+    }
+    .page {
+        max-width: 800px;      /* Looks good on screen */
+        padding: 32px;         /* Only for screen display */
+        margin: 24px auto;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+}
+
+/* Print mode cleanup */
+@media print {
+    body {
+        background: white !important;
+    }
+    .page {
+        padding: 0;                /* No internal padding in print */
+        margin: 0;                 /* No margins */
+        border: none;
+        box-shadow: none;
+        page-break-after: always;
+    }
+    .page:last-child {
+        page-break-after: avoid;
+    }
+
+    /* Keep sections together */
+    h2, h3, table, section {
+        page-break-inside: avoid;
+    }
+
+    /* Hide page indicators */
+    .print-break-indicator {
+        display: none;
+    }
+}
+
+    </style>
+</head>
+<body class="bg-white font-sans text-primary-text min-h-screen">
+
+    <div class="page mx-auto space-y-8">
+        
+        <header class="text-center pb-6 border-b border-subtle-border">
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-2 text-primary-text">Pricing Strategy & Cost Analysis</h1>
+            <p class="text-xl font-light text-gray-500">A breakdown of service costs and subscription models.</p>
+        </header>
+
+        <section class="space-y-4 p-4 border border-subtle-border rounded-sm bg-subtle-bg">
+            <h2 class="text-2xl font-bold mb-2 border-l-0 pl-0 mt-0">Table of Contents</h2>
+            <ul class="toc-list space-y-1 pl-0 text-lg">
+                <li><a href="#costs">1. Service Costs & Components</a>
+                    <ul class="pl-6 text-base space-y-0.5">
+                        <li><a href="#cpu">1.1 Monthly Cost per User (CPU)</a></li>
+                        <li><a href="#credit-logic">1.2 Credit Consumption Logic</a></li>
+                    </ul>
+                </li>
+                <li><a href="#tiers">2. Subscription Tiers Breakdown</a>
+                    <ul class="pl-6 text-base space-y-0.5">
+                        <li><a href="#tier-comparison">2.1 Tier Feature Comparison</a></li>
+                        <li><a href="#free-calc">2.2 Free User Tier Calculation</a></li>
+                    </ul>
+                </li>
+                <li><a href="#profit">3. Profit & Breakeven Analysis</a>
+                    <ul class="pl-6 text-base space-y-0.5">
+                        <li><a href="#paid-profit">3.1 Paid User Profit Margin</a></li>
+                        <li><a href="#breakeven">3.2 Required Breakeven Ratio</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section class="space-y-6">
+            <h2 id="costs">1. Service Costs & Components</h2>
+
+            <p class="text-lg text-gray-600">The underlying infrastructure costs drive the pricing model. The table below details the estimated monthly operational cost per active user based on blended API and compute usage for each core feature.</p>
+
+            <h3 id="cpu" class="mt-6 mb-3">1.1 Monthly Cost per User (CPU)</h3>
+            <div class="overflow-x-auto border border-subtle-border rounded-sm">
+                <table class="w-full data-table">
+                    <thead>
+                        <tr>
+                            <th class="w-1/2">Service Component</th>
+                            <th>Cost per User (Monthly)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-medium">AI Detector</td>
+                            <td class="font-semibold text-primary-text">$0.30</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium">Plagiarism Checker</td>
+                            <td class="font-semibold text-primary-text">$0.30</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium">Chat Agent & Humanize Prompts</td>
+                            <td class="font-semibold text-primary-text">$0.20</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium bg-subtle-bg">Total Operational Cost (Per User)</td>
+                            <td class="font-bold text-lg bg-subtle-bg">$0.80</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="space-y-6 page-break-after">
+            <h3 id="credit-logic">1.2 Credit Consumption Logic</h3>
+            <div class="p-6 border border-subtle-border rounded-sm bg-subtle-bg">
+                <p class="text-gray-600 mb-4">Credits are the standardized unit of consumption across all services. This ratio determines the usage ceiling for each subscription tier.</p>
+                <ul class="space-y-2 text-lg list-disc list-inside text-gray-600 pl-4">
+                    <li>Plagiarism checker: <span class="font-semibold text-primary-text">2 credits per word</span></li>
+                    <li>AI Detection / Checking: <span class="font-semibold text-primary-text">1 credit per word</span></li>
+                    <li>Humanized Prompts (Free Cap): <span class="font-semibold text-primary-text">10 usages per month</span></li>
+                </ul>
+                <p class="mt-4 text-sm text-gray-500 pt-4 border-t border-gray-100">Note: The cost structure is based on a blended usage model, reflecting API and infrastructure costs.</p>
+            </div>
+        </section>
+
+        <p class="text-sm text-gray-400 text-center print-break-indicator">-- Page 1 of 3 --</p>
+    </div>
+
+    <div class="page mx-auto space-y-8">
+
+        <h2 id="tiers">2. Subscription Tiers Breakdown</h2>
+        <p class="text-lg text-gray-600">Two primary tiers—Free and Paid—are structured to minimize free-user costs while maximizing value extraction and profit from paying subscribers.</p>
+
+        <section class="space-y-4">
+            <h3 id="tier-comparison" class="mt-6 mb-3">2.1 Tier Feature Comparison</h3>
+            <div class="overflow-x-auto border border-subtle-border rounded-sm">
+                <table class="w-full data-table">
+                    <thead>
+                        <tr>
+                            <th class="w-1/3">Feature</th>
+                            <th class="text-center">Free User Tier</th>
+                            <th class="text-center bg-gray-200/50">Paid User Tier</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-medium">Monthly Fee</td>
+                            <td class="text-center font-semibold">$0</td>
+                            <td class="text-center font-bold text-xl text-primary-text bg-gray-50/50">$20.00</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium">Total Credit Pool</td>
+                            <td class="text-center">5,000 credits</td>
+                            <td class="text-center font-semibold">77,551 credits</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium">Base Prompt Allowance</td>
+                            <td class="text-center">50 prompts</td>
+                            <td class="text-center font-semibold">500 prompts</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium">Estimated Monthly Cost (to us)</td>
+                            <td class="text-center font-semibold text-red-700">$0.80</td>
+                            <td class="text-center font-semibold text-green-700">$10.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="pt-6 border-t border-subtle-border">
+            <h3 id="free-calc" class="text-xl font-bold text-gray-600 mb-2">2.2 Free User Tier Calculation</h3>
+            <ul class="space-y-3 text-lg divide-y divide-gray-100 border border-subtle-border rounded-sm overflow-hidden bg-subtle-bg">
+                <li class="flex justify-between items-center p-3">
+                    <span class="font-medium">Total Service Cost (Sum of CPU)</span>
+                    <span class="font-semibold">$0.80</span>
+                </li>
+                <li class="flex justify-between items-center p-3">
+                    <span class="font-medium">Value of Prompts & Humanize</span>
+                    <span class="font-semibold text-gray-600">~$0.50</span>
+                </li>
+                <li class="flex justify-between items-center p-3">
+                    <span class="font-medium">Total Revenue Potential (from 12.5 users)</span>
+                    <span class="font-semibold text-gray-600">$10.00</span>
+                </li>
+            </ul>
+            <div class="p-3 mt-4 text-sm text-gray-600 border-l-4 border-gray-300 pl-3 bg-gray-50 rounded-r-sm">
+                <span class="font-bold text-gray-700">Goal:</span> Acquire high volume of users at a low operational cost to feed the conversion funnel.
+            </div>
+        </section>
+
+        <p class="text-sm text-gray-400 text-center print-break-indicator">-- Page 2 of 3 --</p>
+    </div>
+
+    <div class="page mx-auto space-y-8">
+        
+        <h2 id="profit" class="pt-4">3. Profit & Breakeven Analysis</h2>
+
+        <section class="space-y-4">
+            <h3 id="paid-profit" class="text-xl font-bold text-gray-700 border-b border-subtle-border pb-2">3.1 Paid User Profit Margin</h3>
+            <div class="overflow-x-auto border border-subtle-border rounded-sm">
+                <table class="w-full data-table">
+                    <thead>
+                        <tr>
+                            <th class="w-1/2">Metric</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-medium">Subscription Fee (Revenue)</td>
+                            <td class="font-semibold">$20.00</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium">Estimated Operational Cost (Paid User)</td>
+                            <td class="font-semibold text-red-600">($10.00)</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold bg-green-50/50">Estimated Profit per Paid User</td>
+                            <td class="font-extrabold text-green-700 bg-green-50/50">$10.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm text-gray-600">The Paid Tier is designed to maintain a 50% gross margin, which accounts for platform costs but excludes sales and marketing overhead.</p>
+        </section>
+        
+        <section class="text-center pt-6 border-t border-subtle-border space-y-4">
+            <h3 id="breakeven" class="text-2xl font-bold mb-4 text-primary-text">3.2 Required Breakeven Ratio</h3>
+            
+            <p class="text-lg text-gray-600">The crucial metric for long-term sustainability is the required paid-to-free user ratio needed to cover all free operational costs.</p>
+
+            <div class="inline-block p-6 bg-subtle-bg border-2 border-accent-light rounded-sm shadow-sm">
+                <p class="text-xl font-medium text-gray-600 mb-2">Required Ratio (Paid : Free Users)</p>
+                <p class="text-6xl font-extrabold text-primary-text">1 : 12.5</p>
+                <p class="text-sm mt-3 text-gray-500">One paid user offsets the cost of 12.5 free users ($10.00 profit / $0.80 free cost = 12.5).</p>
+            </div>
+        </section>
+
+        <footer class="mt-12 pt-4 border-t border-subtle-border text-center text-xs text-gray-400">
+            End of Cost Analysis Report.
+        </footer>
+
+        <p class="text-sm text-gray-400 text-center print-break-indicator">-- Page 3 of 3 --</p>
+    </div>
+</body>
+</html>

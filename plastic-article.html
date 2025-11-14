@@ -3,19 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Microplastics Impact Report</title>
-    <!-- Load Tailwind CSS -->
+    <title>Microplastics Impact Report - Paginated</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Setting the default font to Inter for a modern look */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #ffffff; /* Explicitly white background */
-            color: #4a5568; /* Soft dark gray for low contrast but good readability (gray-700) */
+            background-color: #ffffff;
+            color: #4a5568; /* gray-700 */
         }
         h1, h2, h3 {
-            color: #2d3748; /* Slightly darker gray for headings (gray-800) */
+            color: #2d3748; /* gray-800 */
         }
+
+        /* --- CSS for Pagination (A4 Print Simulation) --- */
+        @page {
+            /* Defines the size of the page for printing */
+            size: A4; 
+            /* Set print margins (adjust as needed) */
+            margin: 1.5cm 1.5cm 1.5cm 1.5cm;
+        }
+
+        /* The 'page' container will hold the content and enforce A4 dimensions */
+        .page {
+            /* This is crucial for viewing on screen to simulate A4 */
+            width: 210mm; 
+            min-height: 297mm;
+            padding: 2cm; 
+            margin: 10px auto; /* Center on screen */
+            border: 1px solid #ccc; /* Border for visual separation on screen */
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            
+            /* Hide the border/shadow when printing */
+            -webkit-print-color-adjust: exact; 
+        }
+
+        /* Only apply A4 simulation styles on screen, not when printing */
+        @media screen {
+            .page {
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                border: 1px solid #ccc;
+            }
+        }
+
+        /* Print-specific CSS: Remove visual styling and force page breaks */
+        @media print {
+            body {
+                /* Reset Tailwind's default body background in case it interferes */
+                background-color: white !important;
+            }
+            .page {
+                /* Reset margins/borders/shadows for print */
+                margin: 0;
+                border: none;
+                box-shadow: none;
+                padding: 0; /* Let @page margins handle the padding */
+                /* Enforce page breaks */
+                page-break-after: always;
+            }
+            /* The last page should not have a break after it */
+            .page:last-child {
+                page-break-after: avoid;
+            }
+            /* Prevent headings/sections from being split across pages where possible */
+            h2, h3 {
+                page-break-before: auto;
+                page-break-after: avoid;
+            }
+            section {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Ensure the Inter font is available */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
     </style>
     <script>
         tailwind.config = {
@@ -29,10 +91,9 @@
         }
     </script>
 </head>
-<body class="bg-white">
+<body class="bg-gray-100"> 
 
-    <div class="container mx-auto p-4 md:p-10 max-w-4xl">
-        <!-- Header / Title Section -->
+    <div class="page container mx-auto max-w-4xl print:max-w-none">
         <header class="mb-12 border-b border-gray-200 pb-4">
             <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-center">
                 The Invisible Threat: Microplastics, Human Health, and Global Ecosystems
@@ -42,7 +103,6 @@
             </p>
         </header>
 
-        <!-- Introduction -->
         <section class="mb-10">
             <h2 class="text-3xl font-bold mb-4 border-l-4 border-indigo-500 pl-4">Introduction</h2>
             <p class="mb-4 leading-relaxed">
@@ -50,19 +110,23 @@
             </p>
         </section>
 
-        <!-- Section 1: Impact on Global Ecosystems -->
         <section class="mb-10">
             <h2 class="text-3xl font-bold mb-6 border-l-4 border-indigo-500 pl-4">Impact on Global Ecosystems</h2>
             <div class="space-y-6">
-                <!-- Marine Life -->
                 <div class="p-6 bg-gray-50 rounded-xl">
                     <h3 class="text-xl font-semibold mb-2 text-indigo-700">1. Marine Environments</h3>
                     <p class="leading-relaxed">
                         Oceans act as the largest sink for plastic pollution. Marine organisms, from zooplankton to whales, frequently mistake microplastics for food. Ingestion can lead to false satiation, reduced feeding activity, growth inhibition, and reproductive difficulties. Furthermore, microplastics can act as vectors, transporting toxic substances like persistent organic pollutants (POPs) that adhere to their surfaces, introducing these contaminants into the marine food web. 
                     </p>
                 </div>
+            </div>
+        </section>
+    </div>
 
-                <!-- Terrestrial and Soil Systems -->
+    <div class="page container mx-auto max-w-4xl print:max-w-none">
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-indigo-500 pl-4 print:hidden">Impact on Global Ecosystems (Continued)</h2>
+            <div class="space-y-6">
                 <div class="p-6 bg-gray-50 rounded-xl">
                     <h3 class="text-xl font-semibold mb-2 text-indigo-700">2. Terrestrial and Soil Systems</h3>
                     <p class="leading-relaxed">
@@ -70,17 +134,15 @@
                     </p>
                 </div>
 
-                <!-- Atmospheric Transport -->
                 <div class="p-6 bg-gray-50 rounded-xl">
                     <h3 class="text-xl font-semibold mb-2 text-indigo-700">3. Atmospheric Transport</h3>
                     <p class="leading-relaxed">
-                        Microplastics are now recognized as airborne pollutants. Fibers released from synthetic clothing during laundry and fragments from vehicle tires can become suspended in the atmosphere. This atmospheric pathway allows microplastics to be deposited far from their source, including remote areas like the Arctic and pristine mountain ranges, making global circulation and contamination complete.
+                        Microplastics are now recognized as airborne pollutants. Fibers released from synthetic clothing during laundry and fragments from vehicle tires can become suspended in the atmosphere. This atmospheric pathway allows microplastics to be deposited far from their from their source, including remote areas like the Arctic and pristine mountain ranges, making global circulation and contamination complete.
                     </p>
                 </div>
             </div>
         </section>
-
-        <!-- Section 2: Impact on Human Health -->
+        
         <section class="mb-10">
             <h2 class="text-3xl font-bold mb-6 border-l-4 border-indigo-500 pl-4">Potential Impact on Human Health</h2>
             <p class="mb-4 leading-relaxed">
@@ -88,15 +150,21 @@
             </p>
 
             <div class="space-y-6">
-                <!-- Ingestion and Digestion -->
                 <div class="p-6 bg-gray-50 rounded-xl">
                     <h3 class="text-xl font-semibold mb-2 text-indigo-700">A. Ingestion Pathways</h3>
                     <p class="leading-relaxed">
                         Humans ingest microplastics through food (seafood, salt, honey), drinking water (bottled and tap), and beverages. The gastrointestinal tract is the first point of contact. While most particles are likely excreted, the smallest nanoparticles may be absorbed through the gut lining and translocated to other organs, including the liver and kidneys.
                     </p>
                 </div>
+            </div>
+        </section>
+    </div>
 
-                <!-- Inhalation and Respiratory System -->
+    <div class="page container mx-auto max-w-4xl print:max-w-none">
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-indigo-500 pl-4 print:hidden">Potential Impact on Human Health (Continued)</h2>
+            <div class="space-y-6">
+
                 <div class="p-6 bg-gray-50 rounded-xl">
                     <h3 class="text-xl font-semibold mb-2 text-indigo-700">B. Inhalation Risk</h3>
                     <p class="leading-relaxed">
@@ -104,17 +172,18 @@
                     </p>
                 </div>
 
-                <!-- Chemical and Toxicological Concerns -->
                 <div class="p-6 bg-gray-50 rounded-xl">
                     <h3 class="text-xl font-semibold mb-2 text-indigo-700">C. Chemical Toxicity</h3>
                     <p class="leading-relaxed">
-                        The primary concern is not just the physical particle but the chemicals associated with it. Microplastics contain residual monomers (like BPA) and additives (such as plasticizers and flame retardants) used during manufacturing. These chemicals, many of which are known endocrine disruptors, can leach out inside the body, potentially interfering with hormonal systems and posing risks to reproductive and metabolic health. [Image of chemical structure of BPA]
+                        The primary concern is not just the physical particle but the chemicals associated with it. Microplastics contain residual monomers (like **BPA**) and additives (such as plasticizers and flame retardants) used during manufacturing. These chemicals, many of which are known **endocrine disruptors**, can leach out inside the body, potentially interfering with hormonal systems and posing risks to reproductive and metabolic health. 
+
+[Image of chemical structure of BPA]
+
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Conclusion -->
         <section class="pt-8 border-t border-gray-200">
             <h2 class="text-3xl font-bold mb-4 border-l-4 border-indigo-500 pl-4">Conclusion and Future Outlook</h2>
             <p class="leading-relaxed mb-4">
@@ -130,17 +199,10 @@
             </div>
         </section>
 
-        <!-- Footer -->
         <footer class="mt-12 pt-4 border-t border-gray-200 text-center text-sm text-gray-400">
             Report Generated on November 2025
         </footer>
-
     </div>
-
-    <!-- Font load for Inter (Optional, but good practice if not system default) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 </body>
 </html>

@@ -8,3 +8,4 @@
 Make this using html and css. Do a good styling but not too much.
 Make the background white and the text color should not contrast. Dont use shadows and all that.
 Remove the asterics and make them actually html tags so they can reflect. style them if necessary
+MUST Use A4 type paging
