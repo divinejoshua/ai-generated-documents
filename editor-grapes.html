@@ -1,0 +1,271 @@
+<link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet"/>
+<script src="https://unpkg.com/grapesjs"></script>
+
+<div id="gjs">
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>E-commerce Platform PRD - Paginated A4</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <style>
+          /* --- Base & Custom Styling --- */
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+          body {
+              font-family: 'Inter', sans-serif;
+              background-color: #f7f7f7; /* Light gray background for contrast to A4 pages */
+              color: #1f2937; /* deep, yet slightly soft gray */
+          }
+          .text-dark-soft {
+              color: #1f2937; 
+          }
+          .prd-list li {
+              margin-bottom: 0.5rem;
+              padding-left: 1.5rem;
+              position: relative;
+          }
+          .prd-list li::before {
+              content: '•';
+              position: absolute;
+              left: 0;
+              color: #6b7280; 
+              font-weight: bold;
+          }
+          .tag {
+              padding: 0.1rem 0.5rem;
+              border-radius: 9999px;
+              font-size: 0.75rem;
+              font-weight: 600;
+              margin-right: 0.5rem;
+              white-space: nowrap; /* Prevent tags from splitting */
+          }
+          .tag-must { background-color: #fecaca; color: #991b1b; } 
+          .tag-should { background-color: #fde68a; color: #92400e; } 
+          .tag-could { background-color: #d1fae5; color: #065f46; } 
+  
+          /* --- CSS for Pagination (A4 Print Simulation) --- */
+          @page {
+              size: A4; 
+              margin: 1.5cm 1.5cm 1.5cm 1.5cm;
+          }
+  
+          .page {
+              width: 210mm; 
+              min-height: 297mm;
+              padding: 2cm; 
+              margin: 15px auto; /* Center on screen, larger margin for visual separation */
+              background-color: white;
+              box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+          }
+  
+          /* Styles specific to screen viewing */
+          @media screen {
+              body {
+                  padding-top: 15px; /* Add padding around the centered pages */
+                  padding-bottom: 15px;
+              }
+          }
+  
+          /* Styles specific to printing */
+          @media print {
+              body {
+                  background-color: white !important;
+              }
+              .page {
+                  margin: 0;
+                  border: none;
+                  box-shadow: none;
+                  padding: 0; 
+                  page-break-after: always;
+              }
+              .page:last-child {
+                  page-break-after: avoid;
+              }
+              /* Optimization to keep sections together */
+              h2, h3, section {
+                  page-break-inside: avoid;
+              }
+              /* Hide the visual break aids on continued sections */
+              .print-break-indicator {
+                  display: none;
+              }
+          }
+          
+          /* Tailwind Config for Inter font */
+          tailwind.config = {
+              theme: {
+                  extend: {
+                      fontFamily: {
+                          sans: ['Inter', 'sans-serif'],
+                      },
+                  }
+              }
+          }
+      </style>
+  </head>
+  <body class="text-dark-soft">
+  
+      <div class="page container mx-auto max-w-4xl print:max-w-none">
+          
+          <header class="mb-10 pb-4 border-b border-gray-200">
+              <h1 class="text-4xl font-bold mb-2">Product Requirements Document (PRD)</h1>
+              <h2 class="text-2xl font-semibold text-gray-500">Minimalist E-commerce Platform</h2>
+          </header>
+  
+          <section class="mb-10 p-6 bg-gray-50 rounded-lg">
+              <h3 class="text-xl font-semibold mb-4 border-b pb-2 border-gray-200">1. Document Overview</h3>
+              <div class="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                      <p class="font-medium">Document Version:</p>
+                      <p>1.0</p>
+                  </div>
+                  <div>
+                      <p class="font-medium">Date:</p>
+                      <p>November 14, 2025</p>
+                  </div>
+                  <div>
+                      <p class="font-medium">Product Owner:</p>
+                      <p>[Placeholder Name]</p>
+                  </div>
+                  <div>
+                      <p class="font-medium">Status:</p>
+                      <p>Draft/Approved</p>
+                  </div>
+              </div>
+          </section>
+  
+          <section class="mb-10">
+              <h3 class="text-xl font-semibold mb-4 border-b pb-2 border-gray-200">2. Introduction & Goals</h3>
+  
+              <p class="mb-4">
+                  This PRD defines the requirements for a new, minimalist e-commerce platform focused on providing a seamless, fast, and distraction-free shopping experience. The platform will initially support a single category of goods (e.g., artisanal products).
+              </p>
+  
+              <h4 class="text-lg font-medium mt-6 mb-2">2.1 Business Goals</h4>
+              <ul class="prd-list pl-4 text-sm">
+                  <li>Achieve a <span class="font-bold">5% conversion rate</span> from product view to purchase within the first 6 months.</li>
+                  <li>Ensure <span class="font-bold">99.9% uptime</span> and load pages in under 2 seconds.</li>
+                  <li>Maintain a Customer Satisfaction (CSAT) score above 85%.</li>
+              </ul>
+  
+              <h4 class="text-lg font-medium mt-6 mb-2">2.2 Target Audience</h4>
+              <p class="text-sm">
+                  Tech-savvy individuals and busy professionals (Ages 25-55) who prioritize <span class="font-bold">clean design, speed, and efficiency</span> over complex features and excessive visuals.
+              </p>
+          </section>
+  
+          <section class="mb-10">
+              <h3 class="text-xl font-semibold mb-4 border-b pb-2 border-gray-200">3. Core Functional Requirements</h3>
+  
+              <h4 class="text-lg font-medium mt-6 mb-2">3.1 Product Catalog & Search</h4>
+              <ul class="prd-list pl-4 text-sm">
+                  <li><span class="tag tag-must">MUST</span> Display products in a clean, grid-based layout.</li>
+                  <li><span class="tag tag-must">MUST</span> Include a simple search bar with auto-suggest functionality.</li>
+                  <li><span class="tag tag-should">SHOULD</span> Allow filtering by 3 core attributes (e.g., price, color, brand).</li>
+              </ul>
+  
+              <h4 class="text-lg font-medium mt-6 mb-2">3.2 Product Details Page (PDP)</h4>
+              <ul class="prd-list pl-4 text-sm">
+                  <li><span class="tag tag-must">MUST</span> Clearly display product title, price, description, and at least one image.</li>
+                  <li><span class="tag tag-must">MUST</span> Include a visible, large "Add to Cart" button.</li>
+                  <li><span class="tag tag-must">MUST</span> Display stock availability status (In Stock/Out of Stock).</li>
+                  <li><span class="tag tag-should">SHOULD</span> Show a simple text-based customer review summary (e.g., 4.5/5 stars).</li>
+              </ul>
+          </section>
+          <p class="text-sm text-gray-400 text-center mt-8 print-break-indicator">-- Page 1 of 3 --</p>
+      </div>
+  
+      <div class="page container mx-auto max-w-4xl print:max-w-none">
+          
+          <h3 class="text-xl font-semibold mb-6 pb-2 border-b border-gray-200 text-gray-500">3. Core Functional Requirements (Continued)</h3>
+  
+          <section class="mb-10">
+              <h4 class="text-lg font-medium mt-6 mb-2">3.3 Shopping Cart & Checkout</h4>
+              <ul class="prd-list pl-4 text-sm">
+                  <li><span class="tag tag-must">MUST</span> Allow users to view, edit quantities, or remove items from the cart.</li>
+                  <li><span class="tag tag-must">MUST</span> Calculate and display the subtotal, tax, and estimated shipping costs.</li>
+                  <li><span class="tag tag-must">MUST</span> Support <span class="font-bold">guest checkout</span> functionality (no required account creation).</li>
+                  <li><span class="tag tag-must">MUST</span> Integrate with Stripe or PayPal for secure payment processing.</li>
+                  <li><span class="tag tag-must">MUST</span> Provide a simple, <span class="font-bold">3-step checkout flow</span> (Shipping, Payment, Review).</li>
+                  <li><span class="tag tag-could">COULD</span> Allow the application of a single coupon code at checkout.</li>
+              </ul>
+  
+              <h4 class="text-lg font-medium mt-6 mb-2">3.4 User Accounts (Optional)</h4>
+              <ul class="prd-list pl-4 text-sm">
+                  <li><span class="tag tag-should">SHOULD</span> Allow registration via email/password.</li>
+                  <li><span class="tag tag-should">SHOULD</span> Provide an order history view for logged-in users.</li>
+                  <li><span class="tag tag-could">COULD</span> Offer a simplified address book management page.</li>
+              </ul>
+          </section>
+  
+          <section class="mb-10">
+              <h3 class="text-xl font-semibold mb-4 border-b pb-2 border-gray-200">4. Non-Functional Requirements</h3>
+  
+              <h4 class="text-lg font-medium mt-6 mb-2">4.1 Performance</h4>
+              <ul class="prd-list pl-4 text-sm">
+                  <li>All pages must load completely within <span class="font-bold">3 seconds</span>, even under peak traffic (optimized image loading is key).</li>
+                  <li>The site must be fully <span class="font-bold">responsive</span> and optimized for mobile devices (mobile-first design).</li>
+              </ul>
+  
+              <h4 class="text-lg font-medium mt-6 mb-2">4.2 Security</h4>
+              <ul class="prd-list pl-4 text-sm">
+                  <li>All transactions and user data transmissions must use <span class="font-bold">HTTPS/SSL encryption</span>.</li>
+                  <li>Payment information must never be stored on internal servers; use <span class="font-bold">PCI-compliant</span> third-party providers.</li>
+              </ul>
+  
+              <h4 class="text-lg font-medium mt-6 mb-2">4.3 Usability & Accessibility</h4>
+              <ul class="prd-list pl-4 text-sm">
+                  <li>Text contrast must meet <span class="font-bold">AA WCAG 2.1</span> standards across all elements.</li>
+                  <li>The navigation structure must be simple and consistent across all pages (<span class="font-bold">max 4 main links</span> in the header).</li>
+                  <li>All interactive elements (buttons, links) must have clear, visible focus states.</li>
+              </ul>
+          </section>
+          <p class="text-sm text-gray-400 text-center mt-8 print-break-indicator">-- Page 2 of 3 --</p>
+      </div>
+  
+      <div class="page container mx-auto max-w-4xl print:max-w-none">
+          
+          <section class="mb-10">
+              <h3 class="text-xl font-semibold mb-4 border-b pb-2 border-gray-200">5. UX/Design Specifications</h3>
+  
+              <h4 class="text-lg font-medium mt-6 mb-2">5.1 Aesthetics (As Specified)</h4>
+              <ul class="prd-list pl-4 text-sm">
+                  <li><span class="font-bold">Color Palette:</span> Primarily white background (`#FFFFFF`) with dark, readable text (Deep Gray).</li>
+                  <li><span class="font-bold">Visual Style:</span> Strictly <span class="font-bold">minimalist</span>, clean lines, and no drop shadows or overly complex graphical elements.</li>
+                  <li><span class="font-bold">Typography:</span> Use the <span class="font-bold">'Inter' sans-serif font</span> for all text to ensure crisp readability.</li>
+              </ul>
+  
+              <h4 class="text-lg font-medium mt-6 mb-2">5.2 Interaction Design</h4>
+              <ul class="prd-list pl-4 text-sm">
+                  <li>Hover states on buttons and links should be indicated by a subtle background fill or text underline, not shadows.</li>
+                  <li>Form fields should be clear and use <span class="font-bold">inline validation</span> to reduce user friction.</li>
+              </ul>
+          </section>
+  
+          <section class="mb-10">
+              <h3 class="text-xl font-semibold mb-4 border-b pb-2 border-gray-200">6. Future Scope (Phase 2)</h3>
+              <ul class="prd-list pl-4 text-sm">
+                  <li>Integration of an inventory management system (IMS) API.</li>
+                  <li>Customer service chat integration.</li>
+                  <li>Allow for user wishlists.</li>
+              </ul>
+          </section>
+  
+          <footer class="mt-12 pt-4 border-t border-gray-200 text-center text-xs text-gray-400">
+              End of Document. Requirements are subject to review and prioritization.
+          </footer>
+          <p class="text-sm text-gray-400 text-center mt-8 print-break-indicator">-- Page 3 of 3 --</p>
+      </div>
+  
+  </body>
+  </html>
+</div>
+
+<script>
+  const editor = grapesjs.init({
+    container: '#gjs',
+    height: '100vh',
+    fromElement: true,
+  });
+</script>

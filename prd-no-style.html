@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Platform PRD - Paginated A4</title>
+</head>
+<body>
+    <div>
+        
+        <header>
+            <h1>Product Requirements Document (PRD)</h1>
+            <h2>Minimalist E-commerce Platform</h2>
+        </header>
+        <section>
+            <h3>1. Document Overview</h3>
+            <div>
+                <div>
+                    <p>Document Version:</p>
+                    <p>1.0</p>
+                </div>
+                <div>
+                    <p>Date:</p>
+                    <p>November 14, 2025</p>
+                </div>
+                <div>
+                    <p>Product Owner:</p>
+                    <p>[Placeholder Name]</p>
+                </div>
+                <div>
+                    <p>Status:</p>
+                    <p>Draft/Approved</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>2. Introduction & Goals</h3>
+            <p>
+                This PRD defines the requirements for a new, minimalist e-commerce platform focused on providing a seamless, fast, and distraction-free shopping experience. The platform will initially support a single category of goods (e.g., artisanal products).
+            </p>
+            <h4>2.1 Business Goals</h4>
+            <ul>
+                <li>Achieve a <span>5% conversion rate</span> from product view to purchase within the first 6 months.</li>
+                <li>Ensure <span>99.9% uptime</span> and load pages in under 2 seconds.</li>
+                <li>Maintain a Customer Satisfaction (CSAT) score above 85%.</li>
+            </ul>
+            <h4>2.2 Target Audience</h4>
+            <p>
+                Tech-savvy individuals and busy professionals (Ages 25-55) who prioritize <span>clean design, speed, and efficiency</span> over complex features and excessive visuals.
+            </p>
+        </section>
+        <section>
+            <h3>3. Core Functional Requirements</h3>
+            <h4>3.1 Product Catalog & Search</h4>
+            <ul>
+                <li><span>MUST</span> Display products in a clean, grid-based layout.</li>
+                <li><span>MUST</span> Include a simple search bar with auto-suggest functionality.</li>
+                <li><span>SHOULD</span> Allow filtering by 3 core attributes (e.g., price, color, brand).</li>
+            </ul>
+            <h4>3.2 Product Details Page (PDP)</h4>
+            <ul>
+                <li><span>MUST</span> Clearly display product title, price, description, and at least one image.</li>
+                <li><span>MUST</span> Include a visible, large "Add to Cart" button.</li>
+                <li><span>MUST</span> Display stock availability status (In Stock/Out of Stock).</li>
+                <li><span>SHOULD</span> Show a simple text-based customer review summary (e.g., 4.5/5 stars).</li>
+            </ul>
+        </section>
+        <p>-- Page 1 of 3 --</p>
+    </div>
+    <div>
+        
+        <h3>3. Core Functional Requirements (Continued)</h3>
+        <section>
+            <h4>3.3 Shopping Cart & Checkout</h4>
+            <ul>
+                <li><span>MUST</span> Allow users to view, edit quantities, or remove items from the cart.</li>
+                <li><span>MUST</span> Calculate and display the subtotal, tax, and estimated shipping costs.</li>
+                <li><span>MUST</span> Support <span>guest checkout</span> functionality (no required account creation).</li>
+                <li><span>MUST</span> Integrate with Stripe or PayPal for secure payment processing.</li>
+                <li><span>MUST</span> Provide a simple, <span>3-step checkout flow</span> (Shipping, Payment, Review).</li>
+                <li><span>COULD</span> Allow the application of a single coupon code at checkout.</li>
+            </ul>
+            <h4>3.4 User Accounts (Optional)</h4>
+            <ul>
+                <li><span>SHOULD</span> Allow registration via email/password.</li>
+                <li><span>SHOULD</span> Provide an order history view for logged-in users.</li>
+                <li><span>COULD</span> Offer a simplified address book management page.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>4. Non-Functional Requirements</h3>
+            <h4>4.1 Performance</h4>
+            <ul>
+                <li>All pages must load completely within <span>3 seconds</span>, even under peak traffic (optimized image loading is key).</li>
+                <li>The site must be fully <span>responsive</span> and optimized for mobile devices (mobile-first design).</li>
+            </ul>
+            <h4>4.2 Security</h4>
+            <ul>
+                <li>All transactions and user data transmissions must use <span>HTTPS/SSL encryption</span>.</li>
+                <li>Payment information must never be stored on internal servers; use <span>PCI-compliant</span> third-party providers.</li>
+            </ul>
+            <h4>4.3 Usability & Accessibility</h4>
+            <ul>
+                <li>Text contrast must meet <span>AA WCAG 2.1</span> standards across all elements.</li>
+                <li>The navigation structure must be simple and consistent across all pages (<span>max 4 main links</span> in the header).</li>
+                <li>All interactive elements (buttons, links) must have clear, visible focus states.</li>
+            </ul>
+        </section>
+        <p>-- Page 2 of 3 --</p>
+    </div>
+    <div>
+        
+        <section>
+            <h3>5. UX/Design Specifications</h3>
+            <h4>5.1 Aesthetics (As Specified)</h4>
+            <ul>
+                <li><span>Color Palette:</span> Primarily white background (`#FFFFFF`) with dark, readable text (Deep Gray).</li>
+                <li><span>Visual Style:</span> Strictly <span>minimalist</span>, clean lines, and no drop shadows or overly complex graphical elements.</li>
+                <li><span>Typography:</span> Use the <span>'Inter' sans-serif font</span> for all text to ensure crisp readability.</li>
+            </ul>
+            <h4>5.2 Interaction Design</h4>
+            <ul>
+                <li>Hover states on buttons and links should be indicated by a subtle background fill or text underline, not shadows.</li>
+                <li>Form fields should be clear and use <span>inline validation</span> to reduce user friction.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>6. Future Scope (Phase 2)</h3>
+            <ul>
+                <li>Integration of an inventory management system (IMS) API.</li>
+                <li>Customer service chat integration.</li>
+                <li>Allow for user wishlists.</li>
+            </ul>
+        </section>
+        <footer>
+            End of Document. Requirements are subject to review and prioritization.
+        </footer>
+        <p>-- Page 3 of 3 --</p>
+    </div>
+</body>
+</html>
