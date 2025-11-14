@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wetrocloud RAG API Documentation</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* User requested: White background */
+            color: #333333; /* Low contrast but highly readable text color */
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 2px solid #eeeeee;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-weight: 300;
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        /* Section Styling */
+        .endpoint-section {
+            background-color: #fcfcfc;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+        }
+
+        h2 {
+            color: #2980b9; /* A professional, clear color for main titles */
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: #555555;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Code and API Details */
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #c0392b; /* A subtle reddish color for code elements */
+            font-size: 0.95em;
+        }
+
+        pre {
+            background-color: #2d2d2d; /* Dark background for code block */
+            color: #f8f8f2; /* Light text for contrast in the code block */
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #f7f7f7;
+            color: #333333;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Wetrocloud RAG-as-a-Service API</h1>
+            <p>The **RAG API** provides endpoints for managing collections, inserting data, and querying resources for Retrieval-Augmented Generation.</p>
+        </header>
+
+        <div class="endpoint-section">
+            <h2>Create Collections</h2>
+            <p>This endpoint allows you to generate a unique **collection ID**, which serves as a container for all your resources. This ID is required for all subsequent insert, query, and delete operations.</p>
+
+            <h3>API Details</h3>
+            <ul>
+                <li><strong>Method:</strong> <code>POST</code></li>
+                <li><strong>Endpoint:</strong> <code>/v1/collection/create/</code></li>
+            </ul>
+
+            <h3>Required Parameters (in Request Body)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>collection_id</code></td>
+                        <td>String</td>
+                        <td>The unique ID you want to assign to the new collection.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Successful Response Example</h3>
+            <pre><code>{
+  "collection_id": "my_unique_collection_id",
+  "success": true
+}</code></pre>
+        </div>
+
+        <div class="endpoint-section">
+            <h2>List All Collections</h2>
+            <p>Use this endpoint to retrieve a list of all existing collections associated with your account.</p>
+
+            <h3>API Details</h3>
+            <ul>
+                <li><strong>Method:</strong> <code>GET</code></li>
+                <li><strong>Endpoint:</strong> <code>/v1/collection/all/</code></li>
+                <li><strong>Parameters:</strong> None (Pagination is supported, up to 20 items per request)</li>
+            </ul>
+
+            <h3>Successful Response Example</h3>
+            <pre><code>{
+  "count": 5,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "collection_id": "175af194-2784-4090-bcec-cefe56ddd222",
+      "created_at": "2024-12-07T12:23:03.196238Z"
+    },
+    {
+      "collection_id": "4fdb1296-adc8-463c-834d-b76c3831e1f0",
+      "created_at": "2024-11-24T14:59:24.047852Z"
+    }
+  ]
+}</code></pre>
+        </div>
+
+        <div class="endpoint-section">
+            <h2>Inserting Resources (Files)</h2>
+            <p>This operation uploads a resource (such as a file, URL, or plain text) into a specified collection for indexing and retrieval.</p>
+            <p><strong>Note:</strong> When calling the API directly, all files must be provided as publicly accessible **URLs**. File paths are only supported via the official SDKs.</p>
+
+            <h3>API Details</h3>
+            <ul>
+                <li><strong>Method:</strong> <code>POST</code></li>
+                <li><strong>Endpoint:</strong> <code>/v1/resource/insert/</code></li>
+            </ul>
+
+            <h3>Required Parameters (in Request Body)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>collection_id</code></td>
+                        <td>String</td>
+                        <td>The unique ID of the collection to insert the resource into.</td>
+                    </tr>
+                    <tr>
+                        <td><code>resource</code></td>
+                        <td>String</td>
+                        <td>The URL of the file, or the file path if using an SDK.</td>
+                    </tr>
+                    <tr>
+                        <td><code>type</code></td>
+                        <td>String</td>
+                        <td>The type of resource being inserted (e.g., <code>"file"</code>).</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Successful Response Example</h3>
+            <pre><code>{
+  "resource_id": "79621681-b680-4918-948d-d7f8c482426a",
+  "success": true,
+  "tokens": 35
+}</code></pre>
+        </div>
+
+        <div class="endpoint-section">
+            <h2>Querying Collections (Free Text)</h2>
+            <p>Query your indexed resources within a collection to retrieve a natural language (free text) response based on the RAG process.</p>
+
+            <h3>API Details</h3>
+            <ul>
+                <li><strong>Method:</strong> <code>POST</code> (Implied for execution)</li>
+                <li><strong>Endpoint:</strong> <code>/v1/query/</code> (Example)</li>
+            </ul>
+
+            <h3>Required Parameters (in Request Body)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>collection_id</code> (required)</td>
+                        <td>String</td>
+                        <td>The unique ID of the collection to query.</td>
+                    </tr>
+                    <tr>
+                        <td><code>request_query</code> (required)</td>
+                        <td>String</td>
+                        <td>The search term or question to ask the collection.</td>
+                    </tr>
+                    <tr>
+                        <td><code>stream</code> (optional)</td>
+                        <td>Boolean</td>
+                        <td>Set to <code>True</code> to enable streaming response. Defaults to <code>False</code>.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Successful Free Text Response Example</h3>
+            <pre><code>{
+  "response": "The sales for Q1 increased by 20% compared to last year, with online channels contributing significantly.",
+  "tokens": 120,
+  "success": true
+}</code></pre>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leo's Long Melody (Expanded Story)</title>
+    <style>
+        /* General Setup and Minimal Styling */
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background-color: #ffffff; /* White background */
+            color: #444444; /* Soft dark gray text */
+            margin: 0;
+            padding: 40px; 
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .comic-strip {
+            display: flex;
+            flex-direction: column; 
+            gap: 30px; 
+            max-width: 900px; /* Slightly wider to accommodate more panels */
+            width: 100%;
+        }
+        
+        /* Responsive Layout: 2 panels per row on wider screens */
+        @media (min-width: 768px) {
+            .comic-strip {
+                flex-direction: row; 
+                flex-wrap: wrap;
+            }
+        }
+
+        .panel {
+            /* Ensures 2 panels fit per row with gap */
+            flex: 1 1 45%; 
+            min-height: 220px;
+            border: none; 
+            border-bottom: 1px solid #eeeeee; /* Very light separator line */
+            padding: 15px 0;
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: left; 
+            box-sizing: border-box;
+            background-color: #ffffff; 
+        }
+
+        @media (min-width: 768px) {
+             .panel {
+                text-align: center; 
+             }
+        }
+
+
+        .caption {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c3e50; 
+        }
+
+        .visual-area {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start; 
+            font-size: 1.1em; 
+            line-height: 1.6;
+            padding: 10px 0;
+        }
+
+        @media (min-width: 768px) {
+             .visual-area {
+                align-items: center; /* Center visuals on wide screens */
+             }
+        }
+
+        /* Specific text/emoji styling - colors remain soft */
+        
+        .emoji {
+            font-size: 3em; 
+            margin-top: 5px;
+        }
+
+        .sound-wave {
+            color: #5d5d5d; 
+            font-size: 2em; 
+            margin-top: 10px;
+        }
+
+        .gray-creep {
+            color: #aaaaaa;
+            font-size: 2.5em;
+        }
+
+        .change-effect {
+            font-size: 2em; 
+            color: #4CAF50;
+        }
+        
+        .full-city-color {
+            color: #ff9800; /* Warm color for the final panel */
+            font-size: 3em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="comic-strip">
+        <!-- 1. Introduction -->
+        <div class="panel panel-1">
+            <div class="caption">Panel 1: Leo the Good Boy</div>
+            <div class="visual-area">
+                <p><strong>Leo</strong> was the kindest boy in the city. His secret weapon? A well-loved, tiny ukulele. He only ever wanted to share *pure joy*.</p>
+                <span class="emoji">👦🎶</span>
+            </div>
+        </div>
+
+        <!-- 2. The Gloom -->
+        <div class="panel panel-2">
+            <div class="caption">Panel 2: The Gloomy City</div>
+            <div class="visual-area">
+                <p>The city was vast, muted, and silent. Everyone was focused on their own gray steps. Leo knew it needed a song.</p>
+                <span class="emoji">🏢☁️🚶‍♀️</span>
+            </div>
+        </div>
+        
+        <!-- 3. The First Strum -->
+        <div class="panel panel-3">
+            <div class="caption">Panel 3: The Local Melody</div>
+            <div class="visual-area">
+                <p>In a small, quiet alley, Leo sat down and began to play the happiest, most insistent melody he knew.</p>
+                <div class="sound-wave">
+                    🎵✨ *Ting-a-ling!* ✨🎶
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Initial Local Change -->
+        <div class="panel panel-4">
+            <div class="caption">Panel 4: Color Activates!</div>
+            <div class="visual-area">
+                <p>The immediate area burst into soft color. Nearby flowers bloomed, and a single, timid smile appeared on a passing face.</p>
+                <div class="change-effect">
+                    😊🌸🌱
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. The Pushback -->
+        <div class="panel panel-5">
+            <div class="caption">Panel 5: Grayness Creeps</div>
+            <div class="visual-area">
+                <p>But the grayness was stubborn. As Leo paused, the color began to recede—the change was too small to stick across the whole city's sadness.</p>
+                <div class="gray-creep">
+                    ⚫️❌🌱
+                </div>
+            </div>
+        </div>
+        
+        <!-- 6. A New Focus -->
+        <div class="panel panel-6">
+            <div class="caption">Panel 6: The Summit</div>
+            <div class="visual-area">
+                <p>Leo realized he needed height. He found the tallest, grayest hill and climbed, his small ukulele feeling heavy with responsibility.</p>
+                <span class="emoji">⛰️⏫</span>
+            </div>
+        </div>
+        
+        <!-- 7. The Grand Performance -->
+        <div class="panel panel-7">
+            <div class="caption">Panel 7: Music for All</div>
+            <div class="visual-area">
+                <p>He played louder than he ever had, a soaring, courageous song meant for every corner of the cityscape. His tune filled the whole sky.</p>
+                <div class="sound-wave" style="font-size: 3em; color: #cc6600;">
+                    🎵📢✨🎶
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. World Changed -->
+        <div class="panel panel-8">
+            <div class="caption">Panel 8: The World Sings Back</div>
+            <div class="visual-area">
+                <p>The gray broke completely! Buildings shone, the sky was bright, and thousands of distant, colorful flowers bloomed. Leo had changed the world.</p>
+                <div class="full-city-color">
+                    🌈🏙️😃🌍
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
