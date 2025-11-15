@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divine's 4-Day Workout Plan</title>
+    <style>
+        /* Define color palette */
+        :root {
+            --primary-text: #212529;
+            --secondary-text: #495057;
+            --accent-color: #007bff;
+            --light-accent: #eaf3ff;
+            --off-white-bg: #f8f9fa;
+        }
+
+        /* A4 Paging Simulation and General Styling */
+        body {
+            background-color: #f1f3f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            max-height: 297mm;
+            margin: 20px auto;
+            background: white;
+            color: var(--primary-text);
+            padding: 20mm;
+            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            box-sizing: border-box;
+            page-break-after: always;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Document Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Arial', sans-serif;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 26pt;
+            text-align: center;
+            border-bottom: 4px solid var(--primary-text);
+            padding-bottom: 10px;
+            color: var(--primary-text);
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 18pt;
+            color: var(--primary-text);
+            margin-top: 2em;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--light-accent);
+        }
+
+        h3 {
+            font-size: 14pt;
+            color: var(--primary-text);
+            font-weight: 600;
+            margin-top: 1.5em;
+        }
+
+        h4 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 1em;
+            text-transform: uppercase;
+            color: var(--secondary-text);
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        .header-code {
+            font-family: monospace;
+            text-align: right;
+            margin-bottom: 2em;
+            font-size: 10pt;
+            letter-spacing: 3px;
+            color: var(--secondary-text);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-style: normal;
+            font-size: 13pt;
+            margin-top: -10px;
+            margin-bottom: 2em;
+            color: var(--secondary-text);
+            font-weight: 300;
+        }
+
+        /* List and Box Styling */
+        .client-profile-box {
+            border: 1px solid var(--accent-color);
+            padding: 20px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            background-color: var(--light-accent);
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px 20px;
+        }
+
+        .client-profile-box h4 {
+            grid-column: 1 / -1;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+        
+        .client-profile-box ul {
+            grid-column: 1 / -1;
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px 15px;
+        }
+
+        .client-profile-box li {
+            margin-bottom: 5px;
+        }
+
+        ul {
+            list-style: disc; 
+            padding-left: 20px;
+            margin-top: 0.5em;
+            margin-bottom: 1em;
+            color: var(--secondary-text);
+        }
+        
+        ul strong {
+            color: var(--primary-text);
+        }
+
+        ol li {
+            font-weight: 500;
+        }
+
+        /* Workout Details Specifics */
+        .workout-section ol {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .workout-section ol li {
+            margin-bottom: 20px;
+            border-left: 4px solid var(--secondary-text);
+            padding: 12px 15px;
+            background-color: var(--off-white-bg);
+            border-radius: 2px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .workout-section li > strong {
+            font-size: 13pt;
+            color: var(--secondary-text);
+            margin-bottom: 3px;
+            display: block;
+        }
+
+        .exercise-visual-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .exercise-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            flex-shrink: 0;
+        }
+
+        .form-cues {
+            font-style: italic;
+            color: var(--secondary-text);
+            font-size: 10.5pt;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        
+        /* Training Guidelines - Grid for better structure */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px 25px;
+            list-style: decimal;
+            padding-left: 20px;
+        }
+        
+        .principles-grid li {
+            margin-bottom: 5px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            border-top: 2px solid var(--light-accent);
+            padding-top: 15px;
+            margin-top: 20px;
+        }
+
+        .faq-section strong {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 5px;
+            color: var(--primary-text);
+            font-weight: 700;
+        }
+
+        .faq-section p {
+            font-size: 10.5pt;
+            color: var(--secondary-text);
+            padding-left: 10px;
+            border-left: 3px solid var(--light-accent);
+        }
+
+        /* Page Numbering */
+        .page-number {
+            text-align: center;
+            font-size: 9pt;
+            position: absolute;
+            bottom: 10mm;
+            left: 0;
+            right: 0;
+            color: #777;
+        }
+
+        .two-column {
+            display: flex;
+            gap: 25px;
+        }
+
+        .two-column > div {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- PAGE 1 -->
+    <div class="page">
+        <p class="header-code">UFO.LIFTOFF</p>
+
+        <h1>Divine's 4-Day Workout Plan</h1>
+        <p class="subtitle">Machine-Based, High-Intensity, Low-Volume Protocol</p>
+
+        <h2>Month 1: Building Foundations</h2>
+        
+        <div class="client-profile-box">
+            <h4>Client Profile & Goals</h4>
+            <ul>
+                <li><strong>Height:</strong> 5'6" (167.64 cm)</li>
+                <li><strong>Weight:</strong> 53 kg (117 lbs)</li>
+                <li><strong>Goals:</strong> Cardio, endurance, overall health and basic fitness</li>
+                <li><strong>Focus Areas:</strong> Upper body and legs</li>
+                <li><strong>Training Frequency:</strong> 4 days per week (Push / Pull / Legs / Abs & Conditioning)</li>
+                <li><strong>Allergies:</strong> None</li>
+            </ul>
+        </div>
+        
+        <div class="two-column">
+            <div>
+                <h2>1 Nutrition Guidelines</h2>
+                <ul>
+                    <li><strong>Maintenance Calories:</strong> ∼2,100 calories/day</li>
+                    <li><strong>Target Surplus:</strong> ∼2,400 calories/day (300 calorie surplus)</li>
+                    <li><strong>Protein Target:</strong> 85–95g daily (1.6–1.8g per kg bodyweight)</li>
+                    <li><strong>Hydration:</strong> 2.5L water daily (increase from current 1.0–1.5L)</li>
+                </ul>
+            </div>
+            <div>
+                <h2>2 Training Split</h2>
+                <ul>
+                    <li><strong>Day 1:</strong> Push (Chest / Shoulders / Triceps)</li>
+                    <li><strong>Day 2:</strong> Pull (Back / Rear Delts / Biceps)</li>
+                    <li><strong>Day 3:</strong> Legs (Quads / Hamstrings / Glutes / Calves)</li>
+                    <li><strong>Day 4:</strong> Abs & Conditioning (Core focus + optional cardio finisher)</li>
+                    <li><strong>Rest Days:</strong> 3 days per week with a focus on nutrition, sleep, and light activity (e.g., 30-min walk)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>3 Progressive Overload Plan</h2>
+        <p><strong>Set Structure for Every Exercise:</strong> 1 warm-up set (lighter, focus on feel) + 2 very hard working sets of 8–10 reps (RPE 9–10).</p>
+        <p><strong>Weekly Progression (4-week mesocycle):</strong></p>
+        <ul>
+            <li><strong>Week 1:</strong> Establish baseline loads at perfect form (RPE ∼9 at 8–10 reps).</li>
+            <li><strong>Week 2:</strong> Add ∼2.5–5% load or 1 rep per working set while keeping form strict.</li>
+            <li><strong>Week 3:</strong> Add another ∼5–10% load or 1 rep; last working set can reach true failure if safe.</li>
+            <li><strong>Week 4 (Deload):</strong> Reduce working-set load by ∼20% while maintaining the same rep targets; emphasize tempo and range.</li>
+        </ul>
+        <div class="page-number">1</div>
+    </div>
+    
+    <!-- PAGE 2 -->
+    <div class="page">
+        <h2>4 Workout Details</h2>
+
+        <h3 id="day-1">4.1 Day 1: Push 💥</h3>
+        <p>All movements: 1 warm-up set + 2 working sets of 8–10 reps (very hard). Rest 2–3 min between working sets.</p>
+        <div class="workout-section">
+            <ol>
+                <li>
+                    <strong>Seated Chest Press Machine</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/seated-press-machine.png" alt="Seated Chest Press Machine">
+                        <div class="form-cues">Form Cues: Squeeze chest at lockout; control the eccentric; back flat on pad.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Pec Deck (Chest Fly Machine)</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/pec-fly.png" alt="Pec Deck Chest Fly Machine">
+                        <div class="form-cues">Form Cues: Soft elbows; hug the arc; pause at peak contraction.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Shoulder Press Machine</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/shoulder-press.png" alt="Shoulder Press Machine">
+                        <div class="form-cues">Form Cues: Core braced; press straight up; avoid forward drift.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Cable Lateral Raise</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/cable-raise.png" alt="Cable Lateral Raise">
+                        <div class="form-cues">Form Cues: Slight forward lean; lead with pinky; 2–3s negative.</div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="page-number">2</div>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="page">
+        <div class="workout-section">
+            <ol start="5">
+                <li>
+                    <strong>Tricep Pushdown (Cable, Rope or Bar)</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/pushdown.png" alt="Tricep Pushdown">
+                        <div class="form-cues">Form Cues: Elbows pinched to sides; full extension; control the return.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Seated Dip Machine</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/seated-dip.png" alt="Seated Dip Machine">
+                        <div class="form-cues">Form Cues: Shoulders down & back; lockout with triceps, not shoulders.</div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <h3 id="day-2">4.2 Day 2: Pull 💪</h3>
+        <p>All movements: 1 warm-up set + 2 working sets of 8–10 reps (very hard). Rest 2–3 min between working sets.</p>
+        <div class="workout-section">
+            <ol>
+                <li>
+                    <strong>Lat Pulldown (Wide Grip)</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/seated-press-machine.png" alt="Lat Pulldown">
+                        <div class="form-cues">Form Cues: Start with scapular depression; pull to upper chest; control up.</div>
+                    </div>
+                </li>
+                <li> 
+                    <strong>Seated Row Machine</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/seated-row.png" alt="Seated Row Machine">
+                        <div class="form-cues">Form Cues: Chest up; pull to lower ribs; squeeze shoulder blades.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Assisted Pull-Up Machine</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/assisted-pull-up.png" alt="Assisted Pull-Up Machine">
+                        <div class="form-cues">Form Cues: Full stretch at bottom; lead with elbows; avoid swinging.</div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="page-number">3</div>
+    </div>
+
+    <!-- PAGE 4 -->
+    <div class="page">
+        <div class="workout-section">
+            <ol start="4">
+                <li>
+                    <strong>Cable Rear Delt Fly</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/cable-rear-delt-fly.png" alt="Cable Rear Delt Fly">
+                        <div class="form-cues">Form Cues: Arms slightly bent; move in a wide arc; pause in back position.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Machine Bicep Curl</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/machine-bicep-curl.png" alt="Machine Bicep Curl">
+                        <div class="form-cues">Form Cues: Elbows fixed; squeeze at top; 2–3s lower.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Preacher Curl Machine</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/preacher-curl.png" alt="Preacher Curl Machine">
+                        <div class="form-cues">Form Cues: Full range; no shoulder sway; constant tension.</div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <h3 id="day-3">4.3 Day 3: Legs 🦵</h3>
+        <p>All movements: 1 warm-up set + 2 working sets of 8–10 reps (very hard). Rest 2–3 min between working sets.</p>
+        <div class="workout-section">
+            <ol>
+                <li>
+                    <strong>Leg Press Machine</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/leg-press.png" alt="Leg Press Machine">
+                        <div class="form-cues">Form Cues: Feet shoulder-width; depth to ∼ thighs parallel; drive through heels.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Leg Extension Machine</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/leg-extension.png" alt="Leg Extension Machine">
+                        <div class="form-cues">Form Cues: Control top squeeze; do not slam stack; full but knee-friendly ROM.</div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="page-number">4</div>
+    </div>
+
+    <!-- PAGE 5 -->
+    <div class="page">
+        <div class="workout-section">
+            <ol start="3">
+                <li>
+                    <strong>Lying Hamstring Curl Machine</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/lying-hamstring-curl.png" alt="Lying Hamstring Curl Machine">
+                        <div class="form-cues">Form Cues: Hips pressed down; heels to glutes; slow eccentric.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Glute Drive / Hip Thrust Machine</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/glute-drive-hip-thrust.png" alt="Glute Drive Hip Thrust Machine">
+                        <div class="form-cues">Form Cues: Chin tucked; posterior pelvic tilt; pause at top.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Standing Calf Raise Machine</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/standing-calf-raise.png" alt="Standing Calf Raise Machine">
+                        <div class="form-cues">Form Cues: Full stretch at bottom; rise tall; brief hold at peak.</div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <h3 id="day-4">4.4 Day 4: Abs & Conditioning 🔥</h3>
+        <p>All movements: 1 warm-up set + 2 working sets of 8–10 reps (very hard) unless noted.</p>
+        <div class="workout-section">
+            <ol>
+                <li>
+                    <strong>Cable Crunch</strong> (12–15 reps if 8–10 is too easy; adjust load to keep it hard)
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/cable-crunch.png" alt="Cable Crunch">
+                        <div class="form-cues">Form Cues: Ribcage to pelvis; exhale into crunch; slow return.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Seated Ab Machine</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/seated-ab-machine.png" alt="Seated Ab Machine">
+                        <div class="form-cues">Form Cues: Brace; flex through abs not hips; peak squeeze.</div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="page-number">5</div>
+    </div>
+
+    <!-- PAGE 6 -->
+    <div class="page">
+        <div class="workout-section">
+            <ol start="3">
+                <li>
+                    <strong>Hanging Knee Raise / Captain's Chair</strong> (aim 10–15)
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/hanging-knee-raise.png" alt="Hanging Knee Raise">
+                        <div class="form-cues">Form Cues: Posterior tilt; curl pelvis up; avoid swinging.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Oblique Cable Twist</strong>
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/oblique-cable-twist.png" alt="Oblique Cable Twist">
+                        <div class="form-cues">Form Cues: Hips square; rotate through trunk; control both directions.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Decline Sit-Up or Stability Ball Crunch</strong> (10–15)
+                    <div class="exercise-visual-row">
+                        <img class="exercise-image" src="/images/decline-sit-up.png" alt="Decline Sit-Up">
+                        <div class="form-cues">Form Cues: Neutral neck; full curl; slow negative.</div>
+                    </div>
+                </li>
+                <li>
+                    <strong>Optional Finisher:</strong> 10–15 minutes incline treadmill or stair machine (moderate intensity).
+                </li>
+            </ol>
+        </div>
+
+        <h3 id="rest-recovery">4.5 Days 5–7: Rest & Recovery 🧘</h3>
+        <ul>
+            <li>Prioritize meal planning, grocery shopping, and meal prep to hit daily calorie and protein targets.</li>
+            <li>Light activity on at least one rest day (e.g., 30-minute walk), mobility as desired.</li>
+        </ul>
+
+        <h2>5 Training Guidelines</h2>
+        <h4>CRITICAL TRAINING PRINCIPLES</h4>
+        <ol class="principles-grid">
+            <li><strong>Intensity & Rep Range:</strong> Finish each working set in the 8–10 rep range with strict form at RPE 9–10.</li>
+            <li><strong>Sets to (Near) Failure:</strong> Push working sets to 0–1 reps in reserve; last working set of big moves may go to failure if safe.</li>
+            <li><strong>Form & ROM:</strong> Technique first; emphasize full, controlled range with 2–3s eccentrics.</li>
+            <li><strong>Rest Periods:</strong> 2–3 minutes between working sets; 60–90s is acceptable for smaller isolation moves if recovered.</li>
+            <li><strong>Progressive Overload:</strong> Aim to beat last session by load or reps; log every set.</li>
+            <li><strong>Warm-Up:</strong> 10 minutes light cardio to a light sweat before lifting; ramp-up sets as needed before first working set of a pattern.</li>
+        </ol>
+
+        <div class="page-number">6</div>
+    </div>
+
+    <!-- PAGE 7 -->
+    <div class="page">
+        <ol class="principles-grid" start="7">
+            <li><strong>Recovery:</strong> Sleep 8+ hours; hydrate (2.5L/day); adjust effort based on daily readiness.</li>
+            <li><strong>Daily Weigh-Ins:</strong> Weigh first thing each morning; track weekly average trends, not day-to-day noise.</li>
+            <li><strong>Week 4 Assessment:</strong> Compare initial loads, technique, and body metrics; adjust targets for next mesocycle.</li>
+            <li><strong>Most Important:</strong> Have fun and stay consistent.</li>
+        </ol>
+        
+        <h2>6 Frequently Asked Questions</h2>
+        <div class="faq-section">
+            <strong>Q: How do I know when my progress is stalling?</strong>
+            <p>A: If for a few weeks you are not adding reps or load on any exercise (with consistent sleep/nutrition), progress is stalling. Adjust: add calories, extend rest, or recheck technique.</p>
+
+            <strong>Q: Should I train when sore?</strong>
+            <p>A: If soreness is significant, rest. Mild soreness is okay. Prioritize sleep and nutrition to reduce soreness.</p>
+
+            <strong>Q: When should I start using heavier weights?</strong>
+            <p>A: When you can hit 10 clean reps on a working set at a given load, increase load next session to bring reps back toward 8, then build again.</p>
+        </div>
+
+        <p class="subtitle" style="margin-top: 50px; color: var(--accent-color);">UFO.LIFTOFF • Elevate Your Training</p>
+        
+        <div class="page-number">7</div>
+    </div>
+</body>
+</html>

@@ -5,7 +5,8 @@
 
 """Styling Prompts"""
 
-Make this using html and css. Do a good styling but not too much.
+Make this document using html and css. Do a good styling but not too much.
 Make the background white and the text color should not contrast. Dont use shadows and all that.
-Remove the asterics and make them actually html tags so they can reflect. style them if necessary
+Remove the asterisks and make them actually html tags so they can reflect. style them if necessary
 MUST Use A4 type paging
+Overall Body background must be #e8e8e8 while page background must be white

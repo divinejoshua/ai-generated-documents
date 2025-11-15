@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuton App Partnership Proposal - Babcock University</title>
+    <style>
+        :root {
+            --text-primary: #2c3e50;
+            --text-secondary: #546e7a;
+            --accent-blue: #3498db;
+            --accent-light: #ecf0f1;
+            --border-color: #bdc3c7;
+            --success-green: #27ae60;
+            --highlight-yellow: #f39c12;
+        }
+    
+        body {
+            background-color: #e8e8e8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+    
+        .page {
+            width: 210mm;
+            /* Removed min-height to allow content to dictate height naturally */
+            min-height: 297mm; /* Keep this for visual consistency of an A4 page */
+            max-height: 297mm; /* Keep this for visual consistency of an A4 page */
+            margin: 20px auto;
+            background: white;
+            color: var(--text-primary);
+            padding: 20mm 25mm 30mm 25mm;
+            box-sizing: border-box;
+            page-break-after: always;
+            position: relative;
+        }
+    
+        /* FIX: Changed max-height and overflow properties */
+        .page-content {
+            /* Removed fixed max-height constraint to allow content to flow fully */
+            /* max-height: 247mm; */ 
+            overflow: visible; /* We can keep this since the overall page size is constrained by print CSS */
+        }
+    
+        .page-number {
+            position: absolute;
+            bottom: 15mm;
+            right: 25mm;
+            font-size: 10pt;
+            color: var(--text-secondary);
+        }
+    
+        /* Typography */
+        h1 {
+            font-size: 28pt;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            margin-top: 0;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+    
+        h2 {
+            font-size: 18pt;
+            color: var(--text-primary);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            border-bottom: 3px solid var(--accent-blue);
+            padding-bottom: 6px;
+        }
+    
+        h3 {
+            font-size: 14pt;
+            color: var(--accent-blue);
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+    
+        h4 {
+            font-size: 12pt;
+            color: var(--text-secondary);
+            margin-top: 12px;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+    
+        p {
+            font-size: 11pt;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+    
+        /* Cover Page Styling */
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 247mm;
+            background-image: url('/images/cover-bg.jpg');
+            margin: -20mm -25mm -30mm -25mm;
+            padding: 20mm 25mm 30mm 25mm;
+            color: white;
+        }
+    
+        .cover-logo {
+            font-size: 56pt;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+    
+        .cover-tagline {
+            font-size: 16pt;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 60px;
+            font-weight: 300;
+        }
+    
+        .cover-title {
+            font-size: 36pt;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+    
+        .cover-subtitle {
+            font-size: 20pt;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 80px;
+            font-weight: 400;
+        }
+    
+        .cover-meta {
+            font-size: 11pt;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.8;
+        }
+        .cover-meta strong {
+            color: white;
+            font-weight: 700;
+        }
+    
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--accent-blue);
+        }
+    
+        .logo-text {
+            font-size: 32pt;
+            font-weight: 900;
+            background: #222;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+    
+        .tagline {
+            font-size: 12pt;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: 5px;
+        }
+    
+        /* TOC Styling */
+        .toc-section {
+            margin: 20px 0;
+        }
+    
+        .toc-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dotted var(--border-color);
+            color: var(--text-primary);
+            font-size: 11pt;
+        }
+    
+        .toc-item:hover {
+            background-color: var(--accent-light);
+            padding-left: 10px;
+            transition: all 0.2s;
+        }
+    
+        .toc-title {
+            flex-grow: 1;
+        }
+    
+        .toc-page {
+            color: var(--accent-blue);
+            font-weight: 700;
+            margin-left: 10px;
+        }
+    
+        .toc-category {
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 12pt;
+        }
+    
+        /* Info Box */
+        .info-box {
+            background-color: var(--accent-light);
+            border-left: 5px solid var(--accent-blue);
+            padding: 15px 18px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+        }
+    
+        .info-box p {
+            margin: 6px 0;
+            font-size: 10.5pt;
+        }
+    
+        .info-box.success {
+            background-color: #d4edda;
+            border-left-color: var(--success-green);
+        }
+    
+        .info-box.highlight {
+            background-color: #fff3cd;
+            border-left-color: var(--highlight-yellow);
+        }
+    
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+    
+        .stat-box {
+            background: #1e293b;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 1px;
+        }
+    
+        .stat-number {
+            font-size: 32pt;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 5px;
+        }
+    
+        .stat-label {
+            font-size: 10pt;
+            opacity: 0.9;
+        }
+    
+        /* Lists */
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 25px;
+            color: var(--text-primary);
+        }
+    
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 10.5pt;
+        }
+    
+        li strong {
+            color: var(--accent-blue);
+        }
+    
+        /* Checkmark list */
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+    
+        .checklist li:before {
+            content: "✓ ";
+            color: var(--success-green);
+            font-weight: 900;
+            margin-right: 8px;
+            font-size: 12pt;
+        }
+    
+        strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+    
+        em {
+            color: var(--text-secondary);
+        }
+    
+        /* Screenshot/Image Section */
+        .screenshot-container {
+            margin: 15px 0;
+            text-align: center;
+        }
+    
+        .screenshot {
+            width: 100%;
+            max-width: 160mm;
+            height: 85mm;
+            background: #222;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 11pt;
+            margin: 0 auto;
+            border-radius: 1px;
+            font-weight: 600;
+        }
+    
+        .screenshot.small {
+            height: 60mm;
+        }
+    
+        .screenshot-caption {
+            font-size: 10pt;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+    
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+    
+        th {
+            background: #222;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 700;
+            border: none;
+        }
+    
+        td {
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+    
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+    
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+    
+        .feature-item {
+            padding: 15px;
+            border: 2px solid var(--accent-light);
+            background-color: white;
+            border-radius: 1px;
+            transition: all 0.3s;
+        }
+    
+        .feature-item:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+    
+        .feature-item h4 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: var(--accent-blue);
+            font-size: 13pt;
+        }
+    
+        .feature-item p {
+            margin: 0;
+            font-size: 10pt;
+            line-height: 1.5;
+        }
+    
+        /* Timeline */
+        .timeline {
+            margin: 20px 0;
+        }
+    
+        .timeline-item {
+            display: flex;
+            margin-bottom: 15px;
+        }
+    
+        .timeline-marker {
+            width: 40px;
+            height: 40px;
+            background: #222;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+    
+        .timeline-content h4 {
+            margin-top: 0;
+            color: var(--accent-blue);
+        }
+    
+        /* Testimonial */
+        .testimonial {
+            background-color: var(--accent-light);
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-left: 5px solid var(--accent-blue);
+            border-radius: 0 1px 1px 0;
+        }
+    
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-primary);
+            font-size: 11pt;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+    
+        .testimonial-author {
+            color: var(--accent-blue);
+            font-weight: 700;
+            font-size: 10pt;
+        }
+    
+        /* Signature Section */
+        .signature-section {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+    
+        .signature-box {
+            margin-top: 20px;
+        }
+    
+        .signature-line {
+            border-top: 2px solid var(--text-primary);
+            margin-top: 40px;
+            padding-top: 8px;
+            font-size: 10pt;
+            color: var(--text-secondary);
+        }
+    
+        /* Highlight Box */
+        .highlight-box {
+            background: #222;
+            color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 1px;
+        }
+    
+        .highlight-box h3 {
+            color: white;
+            margin-top: 0;
+        }
+    
+        .highlight-box p {
+            color: rgba(255,255,255,0.95);
+        }
+    
+        /* Contact Box */
+        .contact-box {
+            background-color: var(--accent-light);
+            padding: 20px;
+            border-radius: 1px;
+            margin: 20px 0;
+        }
+    
+        .contact-box h3 {
+            margin-top: 0;
+        }
+    
+        .contact-item {
+            margin: 10px 0;
+            font-size: 11pt;
+        }
+    
+        .contact-item strong {
+            color: var(--accent-blue);
+            display: inline-block;
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: COVER PAGE -->
+    <div class="page">
+        <div class="cover-page">
+            <div class="cover-logo">NUTON</div>
+            <div class="cover-tagline">AI-Powered Study Assistant & Learning Companion</div>
+            
+            <div class="cover-title">Partnership Proposal</div>
+            <div class="cover-subtitle">Transforming Education at<br>Babcock University</div>
+            
+            <div class="cover-meta">
+                <strong>Prepared for:</strong> Babcock University Leadership Team<br>
+                <strong>Prepared by:</strong> Nuton Strategic Partnerships<br>
+                <strong>Date:</strong> November 15, 2025<br>
+                <strong>Reference:</strong> NUTON-BABCOCK-2025-001
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: TABLE OF CONTENTS -->
+    <div class="page">
+        <div class="page-content">
+            <h1>Table of Contents</h1>
+            
+            <div class="toc-category">Introduction</div>
+            <div class="toc-section">
+                <div class="toc-item">
+                    <span class="toc-title">Executive Summary</span>
+                    <span class="toc-page">3</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-title">About Nuton</span>
+                    <span class="toc-page">4</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-title">The Problem & Our Solution</span>
+                    <span class="toc-page">5</span>
+                </div>
+            </div>
+
+            <div class="toc-category">Platform Features</div>
+            <div class="toc-section">
+                <div class="toc-item">
+                    <span class="toc-title">Interactive PDF Chat</span>
+                    <span class="toc-page">6</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-title">Audio-to-Notes & Study Plans</span>
+                    <span class="toc-page">7</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-title">Quizzes & Analytics Dashboard</span>
+                    <span class="toc-page">8</span>
+                </div>
+            </div>
+
+            <div class="toc-category">Partnership Details</div>
+            <div class="toc-section">
+                <div class="toc-item">
+                    <span class="toc-title">Why Babcock University?</span>
+                    <span class="toc-page">9</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-title">Implementation Roadmap</span>
+                    <span class="toc-page">10</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-title">Benefits for Babcock University</span>
+                    <span class="toc-page">11</span>
+                </div>
+            </div>
+
+            <div class="toc-category">Investment & Support</div>
+            <div class="toc-section">
+                <div class="toc-item">
+                    <span class="toc-title">Pricing & Packages</span>
+                    <span class="toc-page">12</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-title">Support & Training</span>
+                    <span class="toc-page">13</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-title">Technical Specifications</span>
+                    <span class="toc-page">14</span>
+                </div>
+            </div>
+
+            <div class="toc-category">Validation & Next Steps</div>
+            <div class="toc-section">
+                <div class="toc-item">
+                    <span class="toc-title">Success Metrics & ROI</span>
+                    <span class="toc-page">15</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-title">Student Success Stories</span>
+                    <span class="toc-page">16</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-title">University Case Study</span>
+                    <span class="toc-page">17</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-title">Next Steps & Contact</span>
+                    <span class="toc-page">18</span>
+                </div>
+            </div>
+        </div>
+        <div class="page-number">2</div>
+    </div>
+
+    <!-- PAGE 3: EXECUTIVE SUMMARY -->
+    <div class="page">
+        <div class="page-content">
+            <h1>Executive Summary</h1>
+            
+            <p>In today's rapidly evolving educational landscape, students face unprecedented challenges: information overload, diverse learning styles, limited one-on-one support, and increasing academic pressure. Babcock University's commitment to excellence demands innovative solutions that empower every student to reach their full potential.</p>
+
+            <p><strong>Nuton</strong> is not just another educational app—it's a comprehensive AI-powered learning ecosystem that transforms how students engage with course materials, manage their study time, and achieve academic success. By partnering with Nuton, Babcock University will provide its students with a 24/7 personal learning assistant that adapts to individual needs, learning styles, and academic goals.</p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number">87%</span>
+                    <span class="stat-label">Student Satisfaction Rate</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">15%</span>
+                    <span class="stat-label">Average Grade Improvement</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">40%</span>
+                    <span class="stat-label">Study Time Reduction</span>
+                </div>
+            </div>
+
+            <div class="info-box success">
+                <p><strong>Key Benefits for Babcock University:</strong></p>
+                <ul class="checklist">
+                    <li>Enhanced academic performance across all departments</li>
+                    <li>24/7 AI-powered learning support for every student</li>
+                    <li>Significant time savings in study preparation and exam revision</li>
+                    <li>Data-driven insights into student learning patterns and needs</li>
+                    <li>Competitive edge in attracting tech-savvy prospective students</li>
+                    <li>Reduced burden on faculty for repetitive questions</li>
+                    <li>Improved student retention and graduation rates</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Special Launch Offer for Babcock University</h3>
+                <p>20% discount on first-year campus-wide deployment</p>
+                <p>Free 2-month pilot program for 500 students • Complimentary training and onboarding • Dedicated account manager • Priority technical support</p>
+            </div>
+
+        </div>
+        <div class="page-number">3</div>
+    </div>
+
+    <!-- PAGE 4: ABOUT NUTON -->
+    <div class="page">
+        <div class="page-content">
+            <h1>About Nuton</h1>
+
+            <h2>Our Mission</h2>
+            <p>At Nuton, we believe every student deserves access to personalized, intelligent learning support that adapts to their unique needs. Our mission is to democratize quality education through AI technology that enhances—not replaces—the human learning experience.</p>
+
+            <h2>What Makes Nuton Different</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>🎯 Truly Personalized</h4>
+                    <p>Our AI learns each student's pace, preferences, and challenges to deliver customized learning experiences.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🚀 Proven Results</h4>
+                    <p>Thousands of students across multiple institutions have achieved measurable academic improvements.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🔒 Privacy First</h4>
+                    <p>SOC 2 certified with enterprise-grade security. Student data never shared with third parties.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>⚡ Lightning Fast</h4>
+                    <p>Instant responses to questions, real-time note generation, and seamless platform performance.</p>
+                </div>
+            </div>
+
+            <div class="screenshot-container">
+                <img src="/images/nuton-dashboard.png" alt="Nuton Dashboard" width="100%" height="100%">            </div>
+        </div>
+        <div class="page-number">4</div>
+    </div>
+
+    <!-- PAGE 5: THE PROBLEM & SOLUTION -->
+    <div class="page">
+        <div class="page-content">
+            <h1>The Problem & Our Solution</h1>
+
+            <h2>Challenges Facing Today's University Students</h2>
+
+            <h3>1. Information Overload</h3>
+            <p>Students are drowning in PDFs, lecture recordings, textbooks, and online resources. Finding specific information quickly becomes a time-consuming treasure hunt that hinders learning efficiency.</p>
+            <div class="info-box">
+                <p><strong>Nuton Solution:</strong> Our AI-powered PDF chat allows students to instantly search, query, and understand any document. Ask questions in natural language and get precise answers with source citations in seconds.</p>
+            </div>
+
+            <h3>2. Passive Lecture Attendance</h3>
+            <p>Students struggle to take comprehensive notes while actively listening during lectures. Missing key concepts is common, and reviewing hours of recordings is impractical.</p>
+            <div class="info-box">
+                <p><strong>Nuton Solution:</strong> Upload lecture recordings and receive AI-generated, well-structured notes with timestamps, key concepts highlighted, and searchable transcripts—all automatically.</p>
+            </div>
+
+            <h3>3. Ineffective Study Planning</h3>
+            <p>Without guidance, students often study inefficiently—spending too much time on familiar material and neglecting weak areas. Last-minute cramming remains the norm.</p>
+            <div class="info-box">
+                <p><strong>Nuton Solution:</strong> Personalized AI study plans analyze course requirements, exam dates, and individual performance to create optimized study schedules that maximize learning and reduce stress.</p>
+            </div>
+
+            <h3>4. Limited Faculty Availability</h3>
+            <p>With large class sizes, professors cannot provide individualized attention to every student. Students with questions outside office hours have nowhere to turn.</p>
+            <div class="info-box">
+                <p><strong>Nuton Solution:</strong> 24/7 AI assistance provides instant answers to student questions, freeing faculty to focus on complex discussions and meaningful mentorship rather than repetitive queries.</p>
+            </div>
+        </div>
+        <div class="page-number">5</div>
+    </div>
+
+    <!-- PAGE 6: INTERACTIVE PDF CHAT -->
+    <div class="page">
+        <div class="page-content">
+            <h1>Core Feature: Interactive PDF Chat</h1>
+
+            <h2>Transform Static Documents into Interactive Learning</h2>
+            <p>Students can upload any PDF—textbooks, research papers, lecture slides, or study guides—and engage in natural conversations with the content. Our advanced AI understands context, makes connections across documents, and provides detailed explanations.</p>
+
+            <div class="screenshot-container">
+                <img src="/images/nuton-chat.png" alt="Nuton PDF Chat" width="100%" height="100%">            </div>
+            </div>
+
+            <h3>Key Capabilities</h3>
+            <ul>
+                <li><strong>Natural Language Queries:</strong> Ask questions as if talking to a tutor—no technical commands needed</li>
+                <li><strong>Source Citations:</strong> Every answer includes page numbers and direct quotes from the document</li>
+                <li><strong>Multi-Document Analysis:</strong> Upload multiple PDFs and ask questions that span across all materials</li>
+                <li><strong>Concept Explanations:</strong> Request simplified explanations, real-world examples, or deeper dives into topics</li>
+                <li><strong>Practice Problems:</strong> Generate custom practice questions based on document content</li>
+                <li><strong>Summary Generation:</strong> Get chapter summaries, key points, or condensed versions of lengthy materials</li>
+            </ul>
+        </div>
+        <div class="page-number">6</div>
+    </div>
+
+    <!-- PAGE 7: AUDIO-TO-NOTES & STUDY PLANS -->
+    <div class="page">
+        <div class="page-content">
+            <h1>Audio-to-Notes & Study Plans</h1>
+
+            <h2>Audio-to-Notes Conversion</h2>
+            <p>Never miss crucial lecture content again. Students upload audio recordings and receive professionally formatted, searchable notes within minutes.</p>
+
+            <div class="screenshot-container">
+                <img src="/images/nuton-learning.png" alt="Nuton Audio to Notes" width="100%" height="100%">
+                        </div>
+
+            <h3>What Makes Our Audio Conversion Special</h3>
+            <ul>
+                <li><strong>Smart Formatting:</strong> Automatic headings, bullet points, and paragraph organization</li>
+                <li><strong>Key Concept Detection:</strong> Important terms, definitions, and formulas are highlighted</li>
+                <li><strong>Export Options:</strong> Download as PDF, Word, or share with study groups</li>
+            </ul>
+
+            <h2>Personalized AI Study Plans</h2>
+            <p>Gone are the days of generic study schedules. Nuton's AI analyzes each student's course load, exam dates, learning pace, and performance data to create dynamic, personalized study plans that evolve with the student.</p>
+
+            <h3>How It Works</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h4>Initial Assessment</h4>
+                        <p>Student inputs courses, exam dates, and current knowledge levels</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h4>AI Analysis</h4>
+                        <p>System analyzes syllabus, identifies key topics, and calculates optimal study allocation</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="page-number">7</div>
+    </div>
+
+    <!-- PAGE 8: QUIZZES & ANALYTICS -->
+    <div class="page">
+        <div class="page-content">
+            <h1>Quizzes & Analytics Dashboard</h1>
+
+            <h2>Intelligent Quiz Generation</h2>
+            <p>Practice makes perfect, but creating quality practice questions is time-consuming. Nuton automatically generates unlimited quiz questions from course materials at varying difficulty levels.</p>
+
+            <h3>Quiz Features</h3>
+            <ul>
+                <li><strong>Auto-Generation:</strong> Upload any PDF and generate multiple-choice, true/false, or short-answer questions</li>
+                <li><strong>Difficulty Scaling:</strong> Choose from basic recall to advanced application-level questions</li>
+                <li><strong>Instant Feedback:</strong> Detailed explanations for both correct and incorrect answers</li>
+                <li><strong>Spaced Repetition:</strong> System prioritizes topics that need reinforcement</li>
+                <li><strong>Exam Simulation:</strong> Create timed mock exams that mirror real test conditions</li>
+                <li><strong>Progress Tracking:</strong> Monitor improvement over time with performance analytics</li>
+            </ul>
+
+            <div class="screenshot-container">
+                <img src="/images/nuton-quiz.png" alt="Nuton Quizzes" width="100%" height="100%">            </div>
+
+            <h2>Study Analytics for Students & Faculty</h2>
+
+            <h3>For Students</h3>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>Performance Insights</h4>
+                    <p>Visual breakdown of quiz scores, topic mastery levels, and improvement trends over time.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Study Time Analysis</h4>
+                    <p>Track daily and weekly study hours with recommendations for optimal study duration.</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="page-number">8</div>
+    </div>
+
+    <!-- PAGE 9: WHY BABCOCK UNIVERSITY -->
+    <div class="page">
+        <div class="page-content">
+            <h1>Why Babcock University?</h1>
+
+            <h2>A Perfect Partnership</h2>
+            <p>Babcock University's commitment to academic excellence, holistic education, and character development aligns perfectly with Nuton's mission to empower students through innovative technology.</p>
+
+            <h3>What We Admire About Babcock</h3>
+            <div class="info-box success">
+                <p><strong>🎓 Academic Excellence:</strong> Consistent ranking among Nigeria's top private universities with rigorous academic standards</p>
+                <p><strong>🌍 Diverse Community:</strong> Students from across Nigeria and international backgrounds create rich learning environment</p>
+                <p><strong>💡 Innovation Focus:</strong> Forward-thinking leadership that embraces technology to enhance education</p>
+                <p><strong>🏆 Student Success:</strong> Outstanding graduate employment rates and alumni achievement record</p>
+                <p><strong>⚖️ Values-Based:</strong> Strong emphasis on character, integrity, and ethical leadership</p>
+            </div>
+
+            <h2>Why This Partnership Makes Sense</h2>
+
+            <h3>Strategic Alignment</h3>
+            <p>Babcock University's strategic goals of enhancing student outcomes, modernizing educational delivery, and maintaining competitive advantage are directly addressed by the Nuton platform.</p>
+
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>Support Large Student Body</h4>
+                    <p>With thousands of students across multiple colleges, personalized attention is challenging. Nuton provides scalable individual support.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Enhance STEM Programs</h4>
+                    <p>Medical, engineering, and science students benefit enormously from AI-powered study tools for complex coursework.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Attract Top Students</h4>
+                    <p>Tech-forward students increasingly choose universities with cutting-edge learning technology.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Improve Retention</h4>
+                    <p>Students with better academic support systems are more likely to persist and graduate successfully.</p>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="page-number">9</div>
+    </div>
+
+    <!-- PAGE 10: IMPLEMENTATION ROADMAP -->
+    <div class="page">
+        <div class="page-content">
+            <h1>Implementation Roadmap</h1>
+
+            <h2>Three-Phase Deployment Strategy</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h4>Phase 1: Pilot Program (Months 1-2)</h4>
+                        <p><strong>Objective:</strong> Test platform with selected student cohort and gather feedback</p>
+                        <ul style="margin-top: 8px;">
+                            <li>Deploy to 500 students across 3-4 departments</li>
+                            <li>Conduct comprehensive onboarding sessions</li>
+                            <li>Train 10-15 faculty ambassadors</li>
+                            <li>Monitor usage patterns and collect user insights</li>
+                        </ul>
+                        <p style="margin-top: 8px;"><strong>Success Metrics:</strong> 70%+ daily active users, 4.0+ satisfaction rating, measurable academic improvement</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h4>Phase 2: Campus-Wide Rollout (Months 3-4)</h4>
+                        <p><strong>Objective:</strong> Extend access to all enrolled students and integrate with existing systems</p>
+                        <ul style="margin-top: 8px;">
+                            <li>Grant access to all Babcock students</li>
+                            <li>Integrate with university LMS and student portal</li>
+                            <li>Deploy institutional analytics dashboard</li>
+                            <li>Establish faculty office hours for platform support</li>
+                        </ul>
+                        <p style="margin-top: 8px;"><strong>Success Metrics:</strong> 60%+ adoption rate, reduced faculty support burden, positive institutional feedback</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h4>Phase 3: Optimization & Expansion (Months 5-6)</h4>
+                        <p><strong>Objective:</strong> Refine platform based on usage data and expand advanced features</p>
+                        <ul style="margin-top: 8px;">
+                            <li>Implement department-specific customizations</li>
+                            <li>Roll out advanced analytics for academic advisors</li>
+                            <li>Introduce collaborative study features</li>
+                            <li>Develop best practices documentation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <p><strong>Timeline Flexibility:</strong> This roadmap can be adjusted based on Babcock's academic calendar, resource availability, and institutional priorities. We adapt to your schedule, not the other way around.</p>
+            </div>
+        </div>
+        <div class="page-number">10</div>
+    </div>
+
+    <!-- PAGE 11: BENEFITS FOR BABCOCK -->
+    <div class="page">
+        <div class="page-content">
+            <h1>Benefits for Babcock University</h1>
+
+            <h2>Institutional Impact</h2>
+
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>🎯 Enhanced Academic Performance</h4>
+                    <p>Students achieve better grades through personalized learning support, leading to improved overall institutional performance metrics and accreditation standings.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>😊 Increased Student Satisfaction</h4>
+                    <p>24/7 learning support and modern tools boost student happiness, translating to better retention and positive word-of-mouth recruitment.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>👨‍🏫 Faculty Efficiency</h4>
+                    <p>Professors spend less time answering repetitive questions and more time on meaningful mentorship, research, and curriculum development.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🏆 Competitive Advantage</h4>
+                    <p>Stand out in university rankings and prospective student decisions as a technology-forward institution investing in student success.</p>
+                </div>
+
+            </div>
+
+            <h2>Quantifiable Expected Outcomes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Current State</th>
+                        <th>Expected Improvement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Average Student GPA</td>
+                        <td>Baseline</td>
+                        <td>+0.3 to 0.5 points</td>
+                    </tr>
+                    <tr>
+                        <td>Student Satisfaction Score</td>
+                        <td>Baseline</td>
+                        <td>+15-20%</td>
+                    </tr>
+                    <tr>
+                        <td>Faculty Support Requests</td>
+                        <td>Baseline</td>
+                        <td>-30-40%</td>
+                    </tr>
+                    <tr>
+                        <td>Student Retention Rate</td>
+                        <td>Baseline</td>
+                        <td>+3-5%</td>
+                    </tr>
+                    <tr>
+                        <td>Study Efficiency</td>
+                        <td>Baseline</td>
+                        <td>+35-40%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box highlight">
+                <p><strong>ROI Projection:</strong> Based on implementations at similar institutions, Babcock can expect a 3:1 return on investment within the first year through improved retention, enhanced reputation, and reduced support costs.</p>
+            </div>
+        </div>
+        <div class="page-number">11</div>
+    </div>
+
+    <!-- PAGE 12: PRICING & PACKAGES -->
+    <div class="page">
+        <div class="page-content">
+            <h1>Pricing & Packages</h1>
+
+            <h2>Flexible Investment Options</h2>
+            <p>We offer three tiers designed to meet the diverse needs of educational institutions. All prices are per student per academic year.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Plan Tier</th>
+                        <th style="width: 45%;">Included Features</th>
+                        <th style="width: 30%;">Annual Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Essential</strong></td>
+                        <td>
+                            • Interactive PDF Chat<br>
+                            • Basic Note Taking<br>
+                            • Personal Study Plans<br>
+                            • Quiz Generation<br>
+                            • Email Support
+                        </td>
+                        <td><strong>$29.99</strong> per student</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Professional</strong></td>
+                        <td>
+                            • All Essential Features<br>
+                            • Audio-to-Notes Conversion<br>
+                            • Advanced Analytics<br>
+                            • Priority Email Support<br>
+                            • Mobile Apps
+                        </td>
+                        <td><strong>$49.99</strong> per student</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Enterprise</strong><br><em>(Recommended)</em></td>
+                        <td>
+                            • All Professional Features<br>
+                            • LMS Integration<br>
+                            • Admin Analytics Dashboard<br>
+                            • Dedicated Account Manager<br>
+                            • 24/7 Priority Support<br>
+                            • Custom Branding<br>
+                            • Faculty Training Program
+                        </td>
+                        <td><strong>$69.99</strong> per student</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+            <h2>Flexible Payment Terms</h2>
+            <ul>
+                <li>Annual payment with 5% discount</li>
+                <li>Bi-annual payment option available</li>
+                <li>Quarterly payment plan with no additional fees</li>
+                <li>Volume discounts for multi-year commitments</li>
+            </ul>
+        </div>
+        <div class="page-number">12</div>
+    </div>
+
+    <!-- PAGE 13: SUPPORT & TRAINING -->
+    <div class="page">
+        <div class="page-content">
+            <h1>Support & Training</h1>
+
+            <h2>Comprehensive Support Ecosystem</h2>
+            <p>We don't just provide software—we provide a complete support structure ensuring successful adoption and ongoing excellence.</p>
+
+            <h3>Multi-Channel Support</h3>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>24/7 Technical Support</h4>
+                    <p>Round-the-clock assistance via email, live chat, and phone. Average response time under 2 hours.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Dedicated Account Manager</h4>
+                    <p>Single point of contact for all institutional needs, strategic planning, and escalations.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Knowledge Base</h4>
+                    <p>Extensive self-service documentation, video tutorials, and FAQs available 24/7.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Community Forum</h4>
+                    <p>Connect with other institutions, share best practices, and learn from peer experiences.</p>
+                </div>
+            </div>
+
+            <h2>Comprehensive Training Program</h2>
+
+            <h3>Phase 1: Faculty & Staff Training (Week 1)</h3>
+            <ul>
+                <li><strong>Administrative Overview:</strong> 2-hour session for university leadership on platform capabilities and institutional benefits</li>
+                <li><strong>Faculty Workshop:</strong> 3-hour hands-on training for professors covering all features and best practices for recommending tools to students</li>
+                <li><strong>IT Integration:</strong> Technical session with IT department for LMS integration and system administration</li>
+                <li><strong>Academic Advisors:</strong> Training on using analytics to support student success initiatives</li>
+            </ul>
+
+            <h3>Phase 2: Student Onboarding (Weeks 2-4)</h3>
+            <ul>
+                <li><strong>Orientation Sessions:</strong> 1-hour interactive sessions for incoming cohorts (multiple sessions to accommodate all students)</li>
+                <li><strong>Department-Specific Demos:</strong> Tailored demonstrations showing relevant use cases for medical, engineering, business students, etc.</li>
+                <li><strong>Quick Start Guides:</strong> Digital and printed materials distributed campus-wide</li>
+                <li><strong>Video Tutorials:</strong> Library of short, focused videos for self-paced learning</li>
+            </ul>
+
+            <h3>Phase 3: Ambassador Program (Ongoing)</h3>
+            <ul>
+                <li><strong>Student Ambassadors:</strong> Train 20-25 tech-savvy students to provide peer-to-peer support and promote best practices</li>
+                <li><strong>Monthly Workshops:</strong> Advanced feature training and study strategy sessions</li>
+                <li><strong>Office Hours:</strong> Regular drop-in support sessions across campus</li>
+            </ul>
+
+            <h2>Ongoing Success Programs</h2>
+            <div class="info-box">
+                <p><strong>Quarterly Business Reviews:</strong> Strategic sessions to review metrics, discuss challenges, and plan improvements</p>
+                <p><strong>Monthly Webinars:</strong> Feature updates, advanced techniques, and guest speakers on educational technology</p>
+                <p><strong>Annual Conference:</strong> Invitation to Nuton's user conference with other institutions for networking and learning</p>
+            </div>
+        </div>
+        <div class="page-number">13</div>
+    </div>
+
+    <!-- PAGE 14: TECHNICAL SPECIFICATIONS -->
+    <div class="page">
+        <div class="page-content">
+            <h1>Technical Specifications</h1>
+
+            <h2>Platform Access & Requirements</h2>
+
+            <h3>Web Platform</h3>
+            <ul>
+                <li><strong>Browser Compatibility:</strong> Chrome, Firefox, Safari, Edge (latest 2 versions)</li>
+                <li><strong>Internet Connection:</strong> Minimum 2 Mbps recommended for optimal performance</li>
+                <li><strong>Device Support:</strong> Desktop, laptop, tablet (iPad, Android tablets)</li>
+            </ul>
+
+            <h3>Mobile Applications</h3>
+            <ul>
+                <li><strong>iOS App:</strong> Requires iOS 14.0 or later, compatible with iPhone and iPad</li>
+                <li><strong>Android App:</strong> Requires Android 8.0 (Oreo) or later</li>
+                <li><strong>Offline Mode:</strong> Access downloaded notes and materials without internet connection</li>
+            </ul>
+
+            <h2>Integration Capabilities</h2>
+
+            <h3>Learning Management System (LMS) Integration</h3>
+            <p>Seamless integration with major LMS platforms used by Babcock University:</p>
+            <ul>
+                <li><strong>Moodle:</strong> Full integration with single sign-on (SSO)</li>
+                <li><strong>Canvas:</strong> Native LTI 1.3 integration</li>
+                <li><strong>Blackboard:</strong> Building block integration available</li>
+            </ul>
+
+            <h3>Single Sign-On (SSO)</h3>
+            <ul>
+                <li>SAML 2.0 authentication</li>
+                <li>OAuth 2.0 / OpenID Connect support</li>
+                <li>Active Directory / LDAP integration</li>
+                <li>Google Workspace and Microsoft 365 authentication</li>
+            </ul>
+
+            <h2>Security & Compliance</h2>
+
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>Data Encryption</h4>
+                    <p>AES-256 encryption at rest, TLS 1.3 for data in transit. All communications encrypted end-to-end.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Certifications</h4>
+                    <p>SOC 2 Type II certified, GDPR compliant, FERPA compliant for student data protection.</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="page-number">14</div>
+    </div>
+
+    <div class="page">
+        <div class="header">
+            <h1>Student Success Stories</h1>
+            <p class="tagline">Hear directly from the students whose academic lives have been transformed.</p>
+        </div>
+        <div class="page-content">
+            
+            <h2>Testimonial Highlights</h2>
+
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "Before Nuton, I spent hours sifting through lecture slides and notes. The **Interactive PDF Chat** feature cut my review time by 50%! I used to aim for a B, now I consistently score A- in my toughest courses."
+                </div>
+                <div class="testimonial-author">
+                    — Tolu A., Engineering Student
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "The **Audio-to-Notes** conversion is a lifesaver. I can now focus 100% on the lecture, knowing Nuton is creating perfect summaries and flashcards for me instantly. It's the ultimate study partner."
+                </div>
+                <div class="testimonial-author">
+                    — Kemi O., Law Student
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "My biggest struggle was procrastination. Nuton's **Personalized Study Plans** kept me accountable and made studying feel less overwhelming. I saw a huge jump in my GPA last semester."
+                </div>
+                <div class="testimonial-author">
+                    — David E., Business Administration
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>Quantifiable Impact</h3>
+                <p>Nuton students report an average of **+15% improvement** in test scores and **3 hours saved per week** on study time.</p>
+            </div>
+
+        </div>
+        <div class="page-number">15</div>
+    </div>
+
+    <div class="page">
+        <div class="header">
+            <h1>University Case Study: Apex College</h1>
+            <p class="tagline">A look at successful implementation and measurable results.</p>
+        </div>
+        <div class="page-content">
+            
+            <h2>The Challenge</h2>
+            <p><strong>Apex College</strong>, a leading institution with over 15,000 students, faced challenges in **student engagement** with online course materials and high **drop-out rates** in core science programs.</p>
+
+            <h3>The Nuton Solution</h3>
+            <p>Nuton was implemented for all 100-200 level courses, providing students with AI-powered personalized learning tools and a dedicated faculty analytics dashboard.</p>
+            <ul class="checklist">
+                <li>Immediate access to interactive learning material using <strong>PDF Chat</strong>.</li>
+                <li>Faculty training on leveraging the <strong>Analytics Dashboard</strong> to identify at-risk students.</li>
+                <li>Full integration with their existing Moodle LMS.</li>
+            </ul>
+
+            <h2>Key Outcomes (12-Month Period)</h2>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number">12%</span>
+                    <span class="stat-label">Average Grade Increase</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">25%</span>
+                    <span class="stat-label">Reduction in Core Course Failures</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">92%</span>
+                    <span class="stat-label">Student Satisfaction Rate</span>
+                </div>
+            </div>
+
+            <div class="info-box success">
+                <p><strong>Conclusion:</strong> Nuton helped Apex College significantly improve academic retention and student performance by making complex information more accessible and study time more efficient. This led to a **$1.2M annual savings** in reduced re-enrollments and administrative overhead.</p>
+            </div>
+
+
+        </div>
+        <div class="page-number">16</div>
+    </div>
+
+    <div class="page">
+        <div class="header">
+            <h1>Next Steps: From Proposal to Partnership</h1>
+            <p class="tagline">A clear path to launch and student success.</p>
+        </div>
+        <div class="page-content">
+            
+            <h2>Proposed Partnership Timeline</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h4>Review & Decision (Weeks 1-2)</h4>
+                        <p>Babcock University review of this proposal. Follow-up Q&A and technical meeting with the IT team. Final agreement on the package tier.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h4>Setup & Onboarding (Weeks 3-4)</h4>
+                        <p>Contract signing. Account provisioning, LMS integration setup, data security review, and scheduling of the initial faculty training session.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h4>Pilot Program (Month 2)</h4>
+                        <p>Soft launch with a designated college or department (e.g., Computer Science or Law) to gather initial feedback and refine the rollout strategy.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <h4>Full Institutional Rollout (Month 3+)</h4>
+                        <p>University-wide launch supported by marketing materials, student workshops, and comprehensive post-launch support and analytics reporting.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Our Call to Action</h2>
+            <p>We are ready to begin the transformation. Your commitment to innovation and academic excellence aligns perfectly with Nuton's mission.</p>
+            
+            <div class="info-box highlight">
+                <p><strong>We recommend scheduling a follow-up demonstration focused on:</strong></p>
+                <ol>
+                    <li>A live faculty deep-dive into the Analytics Dashboard.</li>
+                    <li>Technical integration simulation with your current LMS (e.g., Canvas/Moodle).</li>
+                    <li>Finalizing the institutional discount package.</li>
+                </ol>
+            </div>
+
+        </div>
+        <div class="page-number">17</div>
+    </div>
+
+    <div class="page">
+        <div class="header">
+            <h1>Contact & Formal Acceptance</h1>
+            <p class="tagline">We look forward to partnering with Babcock University to redefine learning.</p>
+        </div>
+        <div class="page-content">
+            
+            <h2>Contact Information</h2>
+            <p>For immediate inquiries, demonstrations, or contract discussions, please contact our Strategic Partnerships Team:</p>
+
+            <div class="contact-box">
+                <h3>Nuton Strategic Partnerships</h3>
+                <div class="contact-item"><strong>Lead:</strong> David </div>
+                <div class="contact-item"><strong>Email:</strong> david@nuton.app</div>
+                <div class="contact-item"><strong>Phone:</strong> +234 809 123 4567</div>
+                <div class="contact-item"><strong>Website:</strong> www.nuton.app/babcock</div>
+            </div>
+
+            <h2>Formal Acceptance</h2>
+            <p>By signing below, both parties agree to the terms and intent of the partnership proposal, pending final legal review and execution of the Master Service Agreement (MSA).</p>
+
+            <div class="signature-section">
+                <div class="signature-box">
+                    <div class="signature-line">
+                        <strong>For Nuton Strategic Partnerships</strong><br>
+                        Name: David | Title: Director
+                    </div>
+                </div>
+                <div class="signature-box">
+                    <div class="signature-line">
+                        <strong>For Babcock University</strong><br>
+                        Name: ____________________ | Title: ____________________
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="page-number">18</div>
+    </div>
